@@ -1,0 +1,24 @@
+<link rel="stylesheet" href="/css/denied.css">
+
+{{> main/header}}
+<section class="denied" role="region" aria-label="Acceso denegado" itemscope
+    itemtype="https://schema.org/WebApplication">
+    <div class="container max-width">
+        <h1 itemprop="name" title="Acceso Denegado">Acceso Denegado</h1>
+
+        <p class="intro" itemprop="description" title="Mensaje de acceso restringido">
+            No tienes permisos para acceder a esta página o recurso.
+        </p>
+
+        <div class="denied-actions">
+            <a href="/" class="page-btn-green" aria-label="Volver al inicio" title="Volver al inicio"
+                data-tooltip="Volver al inicio" itemprop="url">
+                Volver al inicio
+            </a>
+            <a href="/login" class="page-btn-green" style="margin-left: 20px;" aria-label="Iniciar sesión"
+                title="Iniciar sesión" data-tooltip="Iniciar sesión" itemprop="url">
+                Iniciar sesión
+            </a>
+        </div>
+    </div>
+</section>

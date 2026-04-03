@@ -1,0 +1,135 @@
+document.addEventListener("DOMContentLoaded", () => {
+    const subtotalEl = document.getElementById("subtotal");
+    const shippingEl = document.getElementById("shipping");
+    const totalEl = document.getElementById("total");
+    const citySelect = document.getElementById("city");
+    const emptyCartBtn = document.querySelector(".empty-cart");
+
+    const parseCurrency = (value) => {
+        return parseFloat(
+            value.replace(/[^0-9,.-]/g, "").replace(",", ".")
+        ) || 0;
+    };
+
+    const subtotal = parseCurrency(subtotalEl.textContent);
+
+    if (citySelect) {
+        citySelect.addEventListener("change", (e) => {
+            const shippingCost = parseFloat(e.target.value) || 0;
+
+            shippingEl.textContent = `$${shippingCost.toLocaleString("es-CO", { minimumFractionDigits: 0 })}`;
+
+            const total = subtotal + shippingCost;
+            totalEl.textContent = `$${total.toLocaleString("es-CO", { minimumFractionDigits: 0 })}`;
+        });
+    }
+
+    const cartId = window.location.pathname.split("/").pop();
+
+    async function removeProduct(productId) {
+        try {
+            const response = await fetch(`/api/v1/cart/${cartId}/products/${productId}`, {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log("Producto eliminado:", data);
+
+                Swal.fire({
+                    icon: "success",
+                    title: "Producto eliminado",
+                    text: "El producto fue eliminado del carrito.",
+                    confirmButtonText: "OK"
+                }).then(() => {
+                    location.reload();
+                });
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "No se pudo eliminar el producto."
+                });
+            }
+        } catch (error) {
+            console.error("Error de conexión:", error);
+            Swal.fire({
+                icon: "error",
+                title: "Error de conexión",
+                text: "Hubo un problema al intentar eliminar el producto."
+            });
+        }
+    }
+
+    async function emptyCart() {
+        try {
+            const response = await fetch(`/api/v1/cart/${cartId}`, {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log("Carrito vaciado:", data);
+
+                Swal.fire({
+                    icon: "success",
+                    title: "Carrito vaciado",
+                    text: "Todos los productos fueron eliminados.",
+                    confirmButtonText: "OK"
+                }).then(() => {
+                    location.reload();
+                });
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "No se pudo vaciar el carrito."
+                });
+            }
+        } catch (error) {
+            console.error("Error de conexión:", error);
+            Swal.fire({
+                icon: "error",
+                title: "Error de conexión",
+                text: "Hubo un problema al intentar vaciar el carrito."
+            });
+        }
+    }
+
+    if (emptyCartBtn) {
+        emptyCartBtn.addEventListener("click", () => {
+            Swal.fire({
+                title: "¿Estás seguro?",
+                text: "Esto eliminará todos los productos del carrito.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Sí, vaciar",
+                cancelButtonText: "Cancelar"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    emptyCart();
+                }
+            });
+        });
+    }
+
+    document.querySelectorAll(".remove-btn").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            const productId = e.currentTarget.dataset.id;
+            Swal.fire({
+                title: "¿Eliminar producto?",
+                text: "Este producto será eliminado del carrito.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Sí, eliminar",
+                cancelButtonText: "Cancelar"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    removeProduct(productId);
+                }
+            });
+        });
+    });
+});

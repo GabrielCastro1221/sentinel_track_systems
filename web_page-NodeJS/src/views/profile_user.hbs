@@ -1,0 +1,20 @@
+<link rel="stylesheet" href="/css/profileUser/profile-user.css">
+<link rel="stylesheet" href="/css/profileUser/registerPet.css">
+<link rel="stylesheet" href="/css/profileUser/getPetsUser.css">
+<link rel="stylesheet" href="/css/profileUser/updatePetsUser.css">
+<link rel="stylesheet" href="/css/profileUser/update-user.css">
+
+{{> main/header}}
+<section class="profile" id="profile" role="region" aria-label="Perfil de usuario" itemscope
+    itemtype="https://schema.org/ProfilePage">
+    <div class="container">
+        <div class="profile-card">
+            <div class="userData" itemprop="mainEntity" itemscope itemtype="https://schema.org/Person">
+                {{> userProfile/profileUserData }}
+            </div>
+            <div class="userActions" aria-label="Acciones de perfil" role="navigation">
+                {{> userProfile/profileActions }}
+            </div>
+        </div>
+    </div>
+</section>

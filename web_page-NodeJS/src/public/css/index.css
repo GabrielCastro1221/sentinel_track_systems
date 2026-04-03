@@ -1,0 +1,225 @@
+:root {
+    --cl--1--: #ffffff;
+    --cl--2--: #ff3c3c;
+    --cl--3--: #00e5ff;
+    --cl--4--: #00ff88;
+    --cl--5--: rgb(185, 183, 183);
+    --bg--1--: #0a0a0a;
+    --bg--2--: #1a1a1a;
+    --shadow--: 0 0 10px rgba(255, 60, 60, 0.4);
+    --txt--shadow--: 0 2px 4px rgba(2, 248, 137, 0.4);
+    --shadow--green--: 0 0 10px rgba(2, 248, 137, 0.4);
+    --bg--overlay--: rgba(0, 0, 0, 0.4);
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--bg--1--);
+}
+
+img {
+    min-width: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+.row {
+    display: flex;
+}
+
+.flex {
+    flex-wrap: wrap;
+    gap: clamp(2em, 5vw, 5em);
+}
+
+.flex>* {
+    flex: 1 1 25em;
+}
+
+.column {
+    display: grid;
+}
+
+.grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1f));
+    gap: 2em;
+}
+
+.container {
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+.max-width {
+    max-width: 1300px;
+    padding: 0 45px;
+    margin: auto;
+    margin-top: 90px;
+}
+
+.max-width h1 {
+    text-align: center;
+    position: relative;
+    font-size: 50px;
+    font-weight: 500;
+    margin-bottom: 60px;
+    padding-bottom: 20px;
+    color: var(--cl--1--);
+    text-shadow: var(--txt--shadow--);
+}
+
+.max-width h1::after {
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 3px;
+    background: var(--cl--4--);
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.page-btn-green {
+    color: var(--cl--5--);
+    background: var(--bg--2--);
+    border: 1px solid var(--cl--4--);
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 10px 25px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.page-btn-green:hover {
+    background: var(--bg--1--);
+    box-shadow: var(--shadow--green--);
+}
+
+.page-btn-red {
+    color: var(--cl--1-);
+    background: var(--bg--1--);
+    border: 1px solid var(--cl--2--);
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 10px 25px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.page-btn-red:hover {
+    background: var(--bg--2--);
+    box-shadow: var(--shadow--);
+}
+
+.no-data {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--cl--2--);
+    margin-top: 1rem;
+}
+
+.bt {
+    font-size: 11px;
+}
+
+.swal-popup {
+    border-radius: 12px;
+}
+
+.swal-confirm-btn {
+    margin-top: 1em;
+    background: var(--cl--5--);
+    color: var(--bg--1--);
+    padding: 0.8em 1.5em;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    width: 100%;
+    border: 1px solid var(--bg--4--);
+}
+
+.swal-confirm-btn:hover {
+    border: 1px solid var(--bg--1--);
+    background: var(--cl--5--);
+    color: var(--cl--1--);
+    border: none;
+}
+
+.swal-cancel-btn {
+    background: var(--cl--2--);
+    color: var(--cl--1--);
+    font-weight: 500;
+    border-radius: 8px;
+    padding: 8px 20px;
+    transition: all 0.3s ease;
+}
+
+.swal-cancel-btn:hover {
+    border: 2px solid var(--cl--5--);
+}
+
+.swal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.swal-input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--cl--5--);
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: var(--cl--1--);
+    color: var(--bg--1--);
+}
+
+.swal-input:focus {
+    background: var(--cl--1--);
+    box-shadow: var(--shadow--);
+    outline: none;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.error-msg {
+    color: var(--cl--2--);
+    font-size: 0.85rem;
+    margin-top: -1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.return {
+    margin-bottom: 30px;
+}
+
+@media screen and (min-width: 1200px) {
+    .container {
+        max-width: 1125px;
+    }
+}

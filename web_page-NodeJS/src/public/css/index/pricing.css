@@ -1,0 +1,167 @@
+.toggle-switch {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+}
+
+.toggler {
+    appearance: none;
+    width: 50px;
+    height: 25px;
+    background-color: var(--cl--5--);
+    border-radius: 25px;
+    margin: 0 1rem;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.toggler::before {
+    content: "";
+    width: 18px;
+    height: 18px;
+    background-color: var(--cl--2--);
+    position: absolute;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 4px;
+    transition: right 0.3s ease;
+}
+
+.toggler:checked::before {
+    right: 28px;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 30%;
+    min-height: 500px;
+    background: linear-gradient(145deg, #1c1c1c, #2a2a2a);
+    box-shadow: var(--shadow--);
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+}
+
+.card-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--cl--2--);
+}
+
+.card-price {
+    font-size: 2.3rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    color: var(--cl--1--);
+    text-shadow: var(--txt--shadow--);
+}
+
+h2>span {
+    font-size: 1rem;
+    color: var(--cl--5--);
+}
+
+.card ul {
+    text-align: left;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-top: 1rem;
+    padding-left: 0;
+    list-style: none;
+}
+
+.card ul li {
+    margin-bottom: 0.75rem;
+    color: #ddd;
+    display: flex;
+    align-items: center;
+}
+
+.card ul li:before {
+    content: "✔";
+    margin-right: 0.5rem;
+    color: var(--cl--2--);
+    font-weight: bold;
+}
+
+.card-btn {
+    margin-top: 2rem;
+    width: 100%;
+    background: var(--cl--2--);
+    border: none;
+    color: #fff;
+    font-size: 1.1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.card-btn:hover {
+    background: #e02f5c;
+}
+
+#card-1 {
+    background: linear-gradient(145deg, #202020, #292929);
+}
+
+#card-2 {
+    background: linear-gradient(145deg, #2a1c2f, #3a2340);
+}
+
+#card-3 {
+    background: linear-gradient(145deg, #1c2f2a, #23403a);
+}
+
+#maus {
+    background: transparent;
+    color: #fff;
+    border: 1px solid #545c5c;
+    margin-top: 1rem;
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    border-radius: 8px;
+}
+
+option {
+    font-size: 1rem;
+    background-color: #333;
+}
+
+.note {
+    color: var(--cl--2--);
+    font-size: 0.8rem;
+    text-align: left;
+    display: block;
+    margin-top: 5px;
+}
+
+@media (max-width: 992px) {
+    .card {
+        width: 45%;
+    }
+}
+
+@media (max-width: 600px) {
+    .card {
+        width: 90%;
+    }
+}

@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="/css/tracking/tracking.css">
+
+{{> main/header}}
+<section class="tracking" id="tracking" role="region" aria-label="Rastreo Sentinel Track Systems" itemscope
+    itemtype="https://schema.org/WebApplication">
+    <div class="container max-width">
+        <h1 itemprop="name">Rastreo Sentinel Track Systems</h1>
+        <p class="intro" itemprop="description">
+            Explora y gestiona en tiempo real la ubicación de vehículos, mascotas y personas con discapacidad,
+            utilizando el nombre asignado a cada dispositivo GPS.
+        </p>
+        <div class="filter row" role="search" aria-label="Buscar dispositivos GPS">
+            <label for="search" class="hidden">Buscar por nombre, ID o dispositivo</label>
+            <input type="text" id="search" placeholder="Buscar por nombre, ID o dispositivo..."
+                aria-label="Campo de búsqueda de dispositivos GPS" data-tooltip="Escribe el nombre, ID o dispositivo">
+            <button class="search-btn" aria-label="Buscar dispositivo" title="Buscar dispositivo"
+                data-tooltip="Haz clic para buscar">
+                Buscar <i class="fi fi-rr-search" aria-hidden="true"></i>
+            </button>
+        </div>
+        <div id="results" class="results" role="region" aria-live="polite" aria-label="Resultados de búsqueda"></div>
+    </div>
+</section>
+
+<script src="/js/tracking/tracking.js"></script>

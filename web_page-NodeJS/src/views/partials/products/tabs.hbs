@@ -1,0 +1,22 @@
+<section class="container tabs" id="Tabs-prod-detail" role="region" aria-label="Información detallada del producto"
+    itemscope itemtype="https://schema.org/Product">
+    <div class="tabs-buttons" role="tablist" aria-label="Secciones de detalle del producto">
+        <button class="tab-btn page-btn-green active" data-tab="features" role="tab" aria-selected="true" aria-controls="features"
+            data-tooltip="Características del {{product.title}}">
+            Características del producto
+        </button>
+        <button class="tab-btn page-btn-green" data-tab="testimonial" role="tab" aria-selected="false" aria-controls="testimonial"
+            data-tooltip="Comentarios de clientes sobre {{product.title}}">
+            Comentarios de clientes
+        </button>
+    </div>
+
+    <div class="tabs-content">
+        <div id="features" class="tab-content active" role="tabpanel" aria-labelledby="features">
+            {{> products/features}}
+        </div>
+        <div id="testimonial" class="tab-content" role="tabpanel" aria-labelledby="testimonial">
+            {{> products/testimonial}}
+        </div>
+    </div>
+</section>

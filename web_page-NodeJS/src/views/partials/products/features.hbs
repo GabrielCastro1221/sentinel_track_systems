@@ -1,0 +1,20 @@
+<div class="feature-margin">
+    <section class="product-features max-width container">
+        <h1 class="features-title">Características del <span>producto</span></h1>
+        <ul class="features-list">
+            {{#if features.length}}
+            {{#each features}}
+            <li class="feature-item">
+                <i class="fi fi-rr-check icon"></i>
+                {{this}}
+            </li>
+            {{/each}}
+            {{else}}
+            <li class="feature-item">
+                <i class="fi fi-rr-info icon"></i>
+                Este producto aún no tiene características registradas.
+            </li>
+            {{/if}}
+        </ul>
+    </section>
+</div>

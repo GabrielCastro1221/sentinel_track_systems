@@ -1,0 +1,49 @@
+<link rel="stylesheet" href="/css/index/service.css">
+
+<section class="service container" role="region" aria-label="Nuestros servicios" itemscope
+    itemtype="https://schema.org/Service">
+    <div class="max-width">
+        <h1 itemprop="name">Nuestros Servicios</h1>
+        <div class="content" role="list" aria-label="Lista de servicios ofrecidos">
+
+            <div title="Mas informacion sobre Rastreadores de {{this.service_1}}" class="card"
+                data-target="pets-service" role="listitem" itemscope itemtype="https://schema.org/Service">
+                <div class="box">
+                    <i class="fi fi-bs-paw" aria-hidden="true"></i>
+                    <h3 itemprop="name">{{this.service_1}}</h3>
+                    <p itemprop="description">{{this.service_1_desc}}</p>
+                </div>
+            </div>
+
+            <div title="Mas informacion sobre Rastreadores de {{this.service_2}}" class="card"
+                data-target="vehicles-service" role="listitem" itemscope itemtype="https://schema.org/Service">
+                <div class="box">
+                    <i class="fi fi-bs-car" aria-hidden="true"></i>
+                    <h3 itemprop="name">{{this.service_2}}</h3>
+                    <p itemprop="description">{{this.service_2_desc}}</p>
+                </div>
+            </div>
+
+            <div title="Más información sobre Placas Inteligentes QR para Mascotas" class="card"
+                data-target="qr-service" role="listitem" itemscope itemtype="https://schema.org/Service">
+                <div class="box">
+                    <i class="fi fi-bs-truck-side" aria-hidden="true"></i>
+                    <h3 itemprop="name">{{this.service_3}}</h3>
+                    <p itemprop="description">{{this.service_3_desc}}</p>
+                </div>
+            </div>
+
+            <div title="Mas informacion sobre Rastreadores de {{this.service_4}}" class="card"
+                data-target="disabled-services" role="listitem" itemscope itemtype="https://schema.org/Service">
+                <div class="box">
+                    <i class="fi fi-sr-clipboard-user" aria-hidden="true"></i>
+                    <h3 itemprop="name">{{this.service_4}}</h3>
+                    <p itemprop="description">{{this.service_4_desc}}</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<script src="/js/services/tab_service.js"></script>

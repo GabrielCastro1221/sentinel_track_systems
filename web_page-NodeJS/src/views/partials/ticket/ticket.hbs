@@ -1,0 +1,86 @@
+<section class="ticket container max-width" role="region" aria-label="Detalle del ticket de compra" itemscope
+    itemtype="https://schema.org/Order">
+    <div class="title-content">
+        <h1 itemprop="name" class="title">Ticket de compra</h1>
+    </div>
+
+    <p class="ticket-code">
+        Código del ticket: <span itemprop="orderNumber">{{ticket.code}}</span>
+    </p>
+    <p class="ticket-date">
+        Fecha de la compra: <time itemprop="orderDate">{{formatDate ticket.purchase_datetime}}</time>
+    </p>
+    <p class="ticket-status">
+        Estado de la compra: <span itemprop="orderStatus">{{ticket.status}}</span>
+    </p>
+
+    <div class="ticket-body">
+        <h3 class="section-title" title="Productos incluidos en el ticket">Productos</h3>
+        <div class="ticket-products" role="list" aria-label="Lista de productos comprados">
+            {{#each ticket.products}}
+            <div class="ticket-product" role="listitem" itemscope itemtype="https://schema.org/Product"
+                title="Producto comprado">
+                <div class="product-info">
+                    <h4 class="product-title" itemprop="name">{{this.title}}</h4>
+                    <p class="product-qty">Cantidad: <span itemprop="quantity">{{this.quantity}}</span></p>
+                </div>
+                <div class="product-price" itemprop="priceCurrency" content="COP">
+                    $ <span itemprop="price">{{this.price}}</span>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+
+        <h3 class="section-title" title="Resumen de la compra">Resumen</h3>
+        <div class="ticket-summary" itemprop="priceSpecification" itemscope
+            itemtype="https://schema.org/PriceSpecification">
+            <div class="summary-row">
+                <span class="resumen-subtitle">Subtotal</span>
+                <span class="price-s" itemprop="price">$ {{ticket.subtotal}}</span>
+            </div>
+            <div class="summary-row">
+                <span class="resumen-subtitle">Envío</span>
+                <span class="price-s" itemprop="shipping">$ {{ticket.shipping}}</span>
+            </div>
+            <div class="summary-row total">
+                <span class="resumen-subtitle">Total</span>
+                <span class="amount" itemprop="price">$ {{ticket.amount}}</span>
+            </div>
+        </div>
+
+        <h3 class="section-title" title="Datos de envío">Datos de envío</h3>
+        <p class="shipping-note">
+            Por favor revisa cuidadosamente tus datos de envío.
+            Si alguno no es correcto, actualízalo antes de finalizar la compra.
+        </p>
+        <div class="ticket-summary" itemprop="customer" itemscope itemtype="https://schema.org/Person">
+            <div class="summary-row total">
+                <span class="resumen-subtitle-s">Nombre:</span>
+                <span class="price-s" id="user-name" itemprop="name">---</span>
+            </div>
+            <div class="summary-row total">
+                <span class="resumen-subtitle-s">Email:</span>
+                <span class="price-s" id="user-email" itemprop="email">---</span>
+            </div>
+            <div class="summary-row total">
+                <span class="resumen-subtitle-s">Ciudad:</span>
+                <span class="price-s" id="user-city" itemprop="addressLocality">---</span>
+            </div>
+            <div class="summary-row total">
+                <span class="resumen-subtitle-s">Dirección:</span>
+                <span class="price-s" id="user-address" itemprop="streetAddress">---</span>
+            </div>
+            <div class="summary-row total">
+                <span class="resumen-subtitle-s">Teléfono:</span>
+                <span class="price-s" id="user-phone" itemprop="telephone">---</span>
+            </div>
+        </div>
+    </div>
+
+    <button class="page-btn-green" aria-label="Métodos de pago seguros" title="Métodos de pago seguros"
+        data-tooltip="Métodos de pago seguros">
+        Métodos de pago seguros <i class="fi fi-rr-credit-card" aria-hidden="true"></i>
+    </button>
+</section>
+
+<script src="/js/ticket/dataShipping.js"></script>

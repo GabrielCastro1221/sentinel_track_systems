@@ -1,0 +1,152 @@
+.ticket-container {
+    margin-top: 130px;
+}
+
+.title-content {
+    padding: 8px;
+}
+
+.ticket {
+    max-width: 100%;
+    margin: 2rem auto;
+    border-radius: 12px;
+    box-shadow: var(--shadow--green--);
+    padding: 2rem;
+    margin-top: -20px;
+}
+
+.ticket-code {
+    margin-top: -40px;
+}
+
+.ticket-code,
+.ticket-date,
+.ticket-status {
+    font-weight: 600;
+    color: var(--cl--4--);
+    text-shadow: var(--txt--shadow--);
+}
+
+.ticket-code span,
+.ticket-date time,
+.ticket-status span {
+    font-weight: 600;
+    color: var(--cl--1--);
+    text-shadow: var(--txt--shadow--);
+}
+
+.product-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 100px;
+}
+
+.product-title {
+    font-weight: 600;
+    width: 30%;
+    color: var(--cl--5--);
+    text-shadow: var(--txt--shadow--);
+}
+
+.product-qty {
+    width: 50%;
+    font-weight: 600;
+    color: var(--cl--5--);
+    text-shadow: var(--txt--shadow--);
+}
+
+.product-price {
+    margin-top: 10px;
+    width: 20%;
+    font-weight: 600;
+}
+
+.ticket-body {
+    margin-top: 1rem;
+}
+
+.section-title {
+    font-size: 1.2rem;
+    margin: 1rem 0;
+    color: var(--cl--5--);
+    text-transform: uppercase;
+    text-shadow: var(--txt--shadow--);
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.ticket-products {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.ticket-product {
+    display: flex;
+    justify-content: space-between;
+    box-shadow: var(--shadow--green--);
+    padding: 0.8rem;
+    border-radius: 8px;
+}
+
+.product-title {
+    font-weight: 600;
+}
+
+.product-price {
+    color: var(--cl--1--);
+    text-shadow: var(--txt--shadow--);
+    font-size: 18px;
+}
+
+.ticket-summary {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.4rem 0;
+}
+
+.summary-row.total {
+    font-size: 18px;
+    font-weight: bold;
+    padding-top: 0.6rem;
+}
+
+.resumen-subtitle,
+.price-s {
+    color: var(--cl--5--);
+    text-shadow: var(--txt--shadow--);
+    font-weight: 600;
+}
+
+.amount {
+    color: var(--cl--4--);
+    font-weight: 600;
+}
+
+.payment {
+    margin-top: 20px;
+}
+
+.shipping-note {
+    font-size: 0.95rem;
+    color: var(--cl--1--);
+    text-shadow: var(--txt--shadow--);
+    box-shadow: var(--shadow--green--);
+    font-weight: 500;
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.resumen-subtitle-s {
+    color: var(--cl--4--);
+    font-weight: 600;
+    text-shadow: var(--txt--shadow--);
+}

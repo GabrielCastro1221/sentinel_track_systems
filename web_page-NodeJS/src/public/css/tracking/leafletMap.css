@@ -1,0 +1,198 @@
+.map-container {
+    margin-top: 70px;
+    display: flex;
+    justify-content: center;
+}
+
+#map {
+    position: relative;
+    margin: 1rem auto;
+    height: 520px;
+    width: 99%;
+    max-width: 1200px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--bg--2--);
+    box-shadow: var(--shadow--green--), inset 0 0 30px rgba(0, 0, 0, 0.6);
+    z-index: 0;
+}
+
+.leaflet-control {
+    background: linear-gradient(145deg, #111, #000) !important;
+    border-radius: 10px !important;
+    border: 1px solid var(--cl--4--) !important;
+    box-shadow: var(--shadow--green--), inset 0 0 6px rgba(0, 0, 0, 0.8);
+    color: var(--cl--1--) !important;
+}
+
+.leaflet-control-zoom a {
+    background: transparent !important;
+    color: var(--cl--4--) !important;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.leaflet-control-zoom a:hover {
+    color: var(--cl--4--) !important;
+    box-shadow: var(--shadow--green--);
+}
+
+.leaflet-control-layers {
+    color: var(--cl--4--) !important;
+    border-radius: 10px !important;
+    border: 1px solid var(--cl--4--) !important;
+    box-shadow: var(--shadow--green--);
+}
+
+.leaflet-control-layers label {
+    color: var(--cl--1--);
+}
+
+.leaflet-control-scale {
+    border-radius: 8px;
+    border: 1px solid rgba(0, 255, 136, 0.4);
+    color: var(--cl--4--);
+    box-shadow: var(--shadow--green--);
+}
+
+.leaflet-control-layers label {
+    color: var(--cl--1--);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+}
+
+.leaflet-control-layers input[type="radio"]:checked+span {
+    color: var(--cl--4--);
+    font-weight: 700;
+    text-shadow: var(--txt--shadow--);
+}
+
+@keyframes tooltipFade {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes popupFade {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.leaflet-marker-icon {
+    transition: transform 0.2s ease;
+}
+
+.leaflet-marker-icon:hover {
+    transform: scale(1.15);
+    filter:
+        drop-shadow(0 0 6px var(--cl--4--)) drop-shadow(0 0 12px var(--cl--3--));
+}
+
+.leaflet-tooltip {
+    background: linear-gradient(145deg, #111, #000);
+    border: 1px solid var(--cl--4--);
+    color: var(--cl--4--);
+    font-weight: 600;
+    border-radius: 8px;
+    box-shadow: var(--shadow--green--);
+}
+
+.leaflet-popup-content-wrapper {
+    background: linear-gradient(145deg, #111, #000);
+    border: 1px solid var(--cl--4--);
+    border-radius: 12px;
+    box-shadow: var(--shadow--green--);
+}
+
+.leaflet-popup-content {
+    color: var(--cl--4--);
+    font-weight: 600;
+}
+
+.leaflet-control-layers-selector:checked {
+    box-shadow: var(--shadow--green--);
+}
+
+.leaflet-marker-icon {
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.leaflet-marker-icon:hover {
+    transform: scale(1.15);
+}
+
+.poi-content {
+    flex: 1;
+    padding: 10px;
+    border-left: 1px solid var(--cl--5--);
+    overflow-y: auto;
+}
+
+.geofence-tooltip {
+    color: var(--cl--1--);
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 4px;
+    pointer-events: none;
+}
+
+#btn-geofence,
+#btn-finish {
+    cursor: pointer;
+    padding: 4px;
+    background: var(--bg--2--);
+    color: var(--cl--5--);
+    border: 1px solid var(--cl--4--);
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+#save-poi {
+    cursor: pointer;
+    padding: 4px;
+    background: var(--cl--5--);
+    color: var(--cl--2--);
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.input {
+    width: 100%;
+    background-repeat: 5px;
+}
+
+#btn-geofence.active {
+    background-color: var(--bg--2--);
+    color: var(--cl--5--);
+    border-color: var(--cl--4--);
+}
+
+.poi-title {
+    padding: 5px;
+    color: var(--cl--4--);
+    text-shadow: var(--shadow--green--);
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    #map {
+        width: 100%;
+        height: 350px;
+        margin: 0.5rem auto;
+        border-radius: 10px;
+    }
+}

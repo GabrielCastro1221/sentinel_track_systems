@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="/css/products/createReview.css">
+
+<form id="review-form" class="review-form">
+    <h3 class="form-title">Escribe tu <span>comentario</span></h3>
+
+    <div class="form-group">
+        <textarea id="reviewText" name="reviewText" rows="4" required
+            placeholder="¿Qué te pareció el producto?"></textarea>
+    </div>
+    <input style="display: none;" type="text" name="product" id="product" value="{{product._id}}" readonly>
+    <div class="form-group">
+        <label class="rating-title">Calificación</label>
+        <div class="rating-stars">
+            <input type="radio" id="star5" name="rating" value="5" required>
+            <label for="star5" title="5 estrellas">
+                <i class="fi fi-ss-star"></i>
+            </label>
+            <input type="radio" id="star4" name="rating" value="4" required>
+            <label for="star4" title="4 estrellas">
+                <i class="fi fi-ss-star"></i>
+            </label>
+            <input type="radio" id="star3" name="rating" value="3" required>
+            <label for="star3" title="3 estrellas">
+                <i class="fi fi-ss-star"></i>
+            </label>
+            <input type="radio" id="star2" name="rating" value="2" required>
+            <label for="star2" title="2 estrellas">
+                <i class="fi fi-ss-star"></i>
+            </label>
+            <input type="radio" id="star1" name="rating" value="1" required>
+            <label for="star1" title="1 estrellas">
+                <i class="fi fi-ss-star"></i>
+            </label>
+        </div>
+    </div>
+    <button type="submit" class="page-btn">Enviar comentario</button>
+</form>
+
+<script src="/js/store/createReview.js"></script>

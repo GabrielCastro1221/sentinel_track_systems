@@ -1,0 +1,23 @@
+<link rel="stylesheet" href="/css/notFound.css">
+
+{{> main/header}}
+<section class="error" role="region" aria-label="Página no encontrada" itemscope itemtype="https://schema.org/WebPage">
+    <div class="container max-width">
+        <h1 itemprop="name" title="Error 404 - Página no encontrada">Error 404</h1>
+
+        <p class="intro" itemprop="description" title="Mensaje de error 404">
+            Lo sentimos, la página que buscas no existe o fue movida.
+        </p>
+
+        <div class="error-actions">
+            <a href="/" class="page-btn-green" aria-label="Volver al inicio" title="Volver al inicio"
+                data-tooltip="Volver al inicio" itemprop="url">
+                Volver al inicio
+            </a>
+            <a href="/profile" class="page-btn-green" style="margin-left: 20px;" aria-label="Ir a mi perfil"
+                title="Ir a mi perfil" data-tooltip="Ir a mi perfil" itemprop="url">
+                Ir a mi perfil
+            </a>
+        </div>
+    </div>
+</section>

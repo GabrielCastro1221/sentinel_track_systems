@@ -1,0 +1,236 @@
+.admin-section {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border-radius: 10px;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow--green--);
+}
+
+.admin-table thead {
+    background: var(--bg--1--);
+    color: var(--cl--3--);
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 0.9rem 1.2rem;
+    text-align: left;
+    border-bottom: 1px solid var(--cl--3--);
+}
+
+.admin-table td {
+    color: var(--cl--5--);
+    text-shadow: var(--txt--shadow--);
+    font-size: 16px;
+}
+
+.admin-table th {
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    color: var(--cl--1--);
+    border-bottom: 1px solid var(--cl--3--);
+}
+
+.email {
+    font-size: 13px;
+    color: var(--cl--4--);
+}
+
+.status {
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.status.pagado {
+    color: var(--cl--5--);
+    background: var(--bg--1--);
+    border: 1px solid var(--cl--4--);
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 10px 25px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.status.cancelado {
+    color: var(--cl--5--);
+    background: var(--bg--1--);
+    border: 1px solid var(--cl--2--);
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 10px 25px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.page-btn.success {
+    background: #27ae60;
+    color: var(--cl--1--);
+}
+
+.page-btn.success:hover {
+    background: #1e8449;
+}
+
+.page-btn.warning {
+    background: var(--cl--4--);
+    color: var(--cl--2--);
+}
+
+.page-btn.warning:hover {
+    background: var(--cl--4--);
+}
+
+.page-btn.danger {
+    background: var(--cl--6--);
+    color: var(--cl--1--);
+}
+
+.page-btn.danger:hover {
+    background: var(--cl--6--);
+}
+
+.pagination {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.pagination span {
+    margin: 0 1rem;
+    font-weight: 500;
+    color: var(--cl--5--);
+    text-shadow: var(--txt--shadow--);
+}
+
+.swal-ticket {
+    color: var(--bg--1--);
+    text-align: left;
+    padding: 10px;
+}
+
+.swal-ticket-field {
+    margin: 6px 0;
+    font-size: 14px;
+}
+
+.swal-ticket-field strong {
+    color: var(--cl--2--);
+}
+
+.swal-ticket-divider {
+    margin: 12px 0;
+    border: none;
+    border-top: 1px solid var(--cl--2--);
+}
+
+.swal-ticket-subtitle {
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--cl--2--);
+}
+
+.swal-ticket-products {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.swal-ticket-product {
+    display: flex;
+    justify-content: space-between;
+    background: var(--cl--1--);
+    border: 1px solid var(--bg--4--);
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+.swal-ticket-product:hover {
+    background: var(--cl--5--);
+}
+
+.swal-product-title {
+    font-weight: 500;
+    color: var(--bg--1--);
+}
+
+.swal-product-qty {
+    color: var(--bg--1--);
+    margin-left: 8px;
+}
+
+.swal-product-price {
+    font-weight: 600;
+    color: var(--cl--2--);
+}
+
+@media (max-width: 768px) {
+
+    .admin-table,
+    .admin-table thead,
+    .admin-table tbody,
+    .admin-table th,
+    .admin-table td,
+    .admin-table tr {
+        display: block;
+        width: 100%;
+    }
+
+    .admin-table thead {
+        display: none;
+    }
+
+    .admin-table tr {
+        margin-bottom: 1rem;
+        border-radius: 8px;
+        padding: 1rem;
+        box-shadow: var(--shadow--);
+    }
+
+    .admin-table td {
+        border: none;
+        padding: 0.5rem 0;
+        text-align: left;
+        position: relative;
+    }
+
+    .admin-table td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: var(--cl--3--);
+        display: block;
+        margin-bottom: 0.2rem;
+    }
+
+    .action {
+        margin-top: 0.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.3rem;
+    }
+
+    .action button {
+        margin-top: 10px;
+    }
+
+    .status.pagado {
+        border: none;
+        background: transparent;
+    }
+
+    .status.cancelado {
+        border: none;
+        background: transparent;
+    }
+}

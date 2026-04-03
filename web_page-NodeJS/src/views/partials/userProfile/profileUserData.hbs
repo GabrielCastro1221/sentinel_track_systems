@@ -1,0 +1,19 @@
+<div class="profile-photo" itemscope itemtype="https://schema.org/ImageObject">
+    <img src="/assets/images/avatar.jpg" alt="Foto de usuario" id="user-photo" itemprop="contentUrl">
+    <p id="update-photo" title="Subir nueva foto de perfil" aria-label="Subir nueva foto de perfil">Subir foto</p>
+    <input type="file" id="file-input" name="photo" accept="image/*" style="display: none;"
+        aria-label="Seleccionar nueva foto de perfil">
+</div>
+
+<div class="profile-info" itemscope itemtype="https://schema.org/Person">
+    <h3 id="user-name" itemprop="name" title="Nombre del usuario"></h3>
+    <p><span>Email:</span> <span id="user-email" itemprop="email"></span></p>
+    <p><span>Rol:</span> <span id="user-rol" itemprop="jobTitle"></span></p>
+    <p><span>Teléfono:</span> <span id="user-telefono" itemprop="telephone"></span></p>
+    <p><span>Dirección:</span> <span id="user-direccion" itemprop="streetAddress"></span></p>
+    <p><span>Ciudad:</span> <span id="user-ciudad" itemprop="addressLocality"></span></p>
+    <p><span>Género:</span> <span id="user-genero" itemprop="gender"></span></p>
+    <p><span>Edad:</span> <span id="user-edad" itemprop="birthDate"></span></p>
+</div>
+
+<script src="/js/profileUser/getData.js"></script>

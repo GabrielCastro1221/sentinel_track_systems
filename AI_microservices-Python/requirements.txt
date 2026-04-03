@@ -1,0 +1,18 @@
+flask==3.0.2
+uvicorn==0.29.0
+gunicorn==22.0.0
+torch==2.2.2
+torchvision==0.17.2
+torchaudio==2.2.2
+nltk==3.8.1
+numpy==1.26.4
+scikit-learn==1.4.1.post1
+fastapi==0.110.0
+
+################################################
+########## Scripts de ejecucion ################
+################################################
+# python scripts/dev_runner.py dev --port 3000 #
+# python scripts/dev_runner.py build --port 5000
+################################################
+################################################

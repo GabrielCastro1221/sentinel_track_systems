@@ -1,0 +1,159 @@
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.card {
+    padding: 50px 25px;
+    width: calc(26% - 20px);
+    border-radius: 6px;
+    background: #222;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: var(--shadow--green--);
+}
+
+.box {
+    transition: all 0.3s ease;
+}
+
+p {
+    color: var(--cl--1--);
+    text-shadow: var(--txt--shadow--);
+}
+
+.card:hover .box {
+    transform: scale(1.05);
+}
+
+.box i {
+    font-size: 50px;
+    color: var(--cl--4--);
+    transition: color 0.3s ease;
+}
+
+.card:hover .box {
+    color: var(--cl--1--);
+}
+
+.box h3 {
+    color: var(--cl--1--);
+    text-shadow: var(--txt--shadow--);
+    font-size: 18px;
+    padding: 10px 0 7px;
+    text-transform: capitalize;
+}
+
+.service-detail {
+    margin: 60px auto;
+    max-width: 1000px;
+    padding: 20px;
+}
+
+.detail-box {
+    background: var(--bg--2--);
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: var(--shadow--green--);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.detail-box:hover {
+    transform: translateY(-5px);
+}
+
+.detail-title {
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--cl--5--);
+    margin-bottom: 10px;
+    text-shadow: var(--txt--shadow--);
+}
+
+.detail-subtitle {
+    font-size: 1.4rem;
+    color: var(--cl--4--);
+    margin-bottom: 20px;
+}
+
+.detail-box p {
+    font-size: 1rem;
+    color: var(--cl--5--);
+    text-shadow: var(--txt--shadow--);
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.detail-box h3 {
+    font-size: 1.2rem;
+    color: var(--cl--4--);
+    text-shadow: var(--txt--shadow--);
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.detail-box ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.detail-box ul li {
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 12px;
+    color: var(--cl--5--);
+    text-shadow: var(--txt--shadow--);
+    font-size: 0.95rem;
+}
+
+.detail-box ul li::before {
+    content: "✔";
+    position: absolute;
+    left: 0;
+    color: var(--cl--4--);
+    font-weight: bold;
+}
+
+.service-detail {
+    display: none;
+}
+
+.service-detail.active {
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .detail-box {
+        padding: 25px;
+    }
+
+    .detail-title {
+        font-size: 1.8rem;
+    }
+
+    .detail-subtitle {
+        font-size: 1.2rem;
+    }
+}
+
+@media screen and (max-width: 1190px) {
+    .max-width {
+        padding: 0 25px;
+    }
+
+    .card {
+        width: calc(50% - 10px);
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .card {
+        width: 100%;
+    }
+}

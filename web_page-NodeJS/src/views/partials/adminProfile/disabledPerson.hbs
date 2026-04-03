@@ -1,0 +1,62 @@
+<link rel="stylesheet" href="/css/profileAdmin/disabledPerson.css">
+
+<section class="admin-section max-width">
+    <h1>Personas Discapacitadas</h1>
+    <div class="return">
+        <a href="/perfil-admin" class="page-btn-green" style="font-weight:600;">
+            Panel del administrador
+        </a>
+    </div>
+    {{#if disabledPersons.length}}
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Foto</th>
+                <th>Nombre</th>
+                <th>CC</th>
+                <th>Tipo Discapacidad</th>
+                <th>Teléfono Emergencia</th>
+                <th>GPS</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each disabledPersons}}
+            <tr>
+                <td data-label="Foto">
+                    {{#if this.photo}}
+                    <img src="{{this.photo}}" alt="{{this.name}}" class="disabled-avatar" />
+                    {{else}}
+                    <div class="disabled-avatar placeholder">
+                        {{this.name.[0]}}
+                    </div>
+                    {{/if}}
+                </td>
+                <td data-label="Nombre">{{this.name}}</td>
+                <td data-label="CC">{{this.CC}}</td>
+                <td data-label="Sexo">{{this.sex}}</td>
+                <td data-label="Tipo Discapacidad">{{this.disabilityType}}</td>
+                <td data-label="gps"><a href="/gps/{{this.gps}}" class="gps-link">{{this.gps}}</a></td>
+                <td class="action" data-label="Acciones">
+                    <button class="page-btn page-btn-green" data-id="{{this._id}}" data-action="view">
+                        Ver
+                    </button>
+                    <button class="page-btn page-btn-green" data-id="{{this._id}}" data-action="edit">
+                        Editar
+                    </button>
+                    <button class="page-btn page-btn-red" data-id="{{this._id}}" data-action="delete">
+                        Eliminar
+                    </button>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{else}}
+    <p class="no-data">
+        No hay personas discapacitadas registradas en la plataforma en el momento.
+    </p>
+    {{/if}}
+</section>
+
+<script src="/js/profileAdmin/disabledPerson.js"></script>

@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="/css/products/cart.css">
+
+{{> main/header}}
+<section class="cart container" role="region" aria-label="Carrito de compras" itemscope
+    itemtype="https://schema.org/ShoppingCart">
+    <header class="max-width">
+        <h1 itemprop="name">Carrito de compras</h1>
+    </header>
+
+    {{#if cart.products.length}}
+    <div class="cart-layout" role="list" aria-label="Productos en el carrito">
+        {{> cart/cart }}
+        {{> cart/cartSummary }}
+    </div>
+    {{else}}
+    <div class="cart-empty" role="alert" aria-live="polite">
+        <i class="fi fi-rr-info icon" aria-hidden="true"></i>
+        <p itemprop="description">Tu carrito está vacío <i class="fi fi-ss-dolly-flatbed-empty" aria-hidden="true"></i>
+        </p>
+        <div class="btn-cont">
+            <a href="/#store" class="page-btn-green" title="Ir a la tienda para explorar productos"
+                aria-label="Ir a la tienda" itemprop="url">
+                Ir a la tienda
+            </a>
+        </div>
+    </div>
+    {{/if}}
+</section>
+
+<script src="/js/cart/cartActions.js"></script>
+<script src="/js/ticket/ticket.js"></script>

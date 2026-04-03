@@ -1,0 +1,69 @@
+<link rel="stylesheet" href="/css/products/formGuest.css">
+
+{{> main/header}}
+<section class="guest-register max-width" role="region" aria-label="Sección de registro de invitado" itemscope
+    itemtype="https://schema.org/RegisterAction">
+
+    <h2 itemprop="name">Se requieren los datos para el envío</h2>
+
+    <form id="register-guest-form" class="form" role="form" aria-label="Formulario de registro de invitado"
+        itemprop="object" itemscope itemtype="https://schema.org/Person">
+
+        <div class="form-group">
+            <label for="nombre">Nombre completo</label>
+            <input type="text" id="nombre" name="name" placeholder="Ingresa tu nombre completo" required itemprop="name"
+                aria-required="true" />
+        </div>
+
+        <div class="form-group">
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" name="email" placeholder="Ingresa tu correo electrónico" required
+                itemprop="email" aria-required="true" />
+        </div>
+
+        <div class="form-group">
+            <label for="password">Contraseña</label>
+            <input type="password" id="password" name="password" placeholder="Ingresa la contraseña" required
+                aria-required="true" />
+        </div>
+
+        <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" name="telephone" placeholder="Ingresa tu número telefónico" required
+                itemprop="telephone" aria-required="true" />
+        </div>
+
+        <div class="form-group">
+            <label for="direccion">Dirección de envío</label>
+            <input type="text" id="direccion" name="address" placeholder="Ingresa tu dirección actual" required
+                itemprop="address" aria-required="true" />
+        </div>
+
+        <div class="form-group">
+            <label for="ciudad">Ciudad</label>
+            <input type="text" id="ciudad" name="addressLocality" placeholder="Ingresa tu ciudad" required
+                itemprop="addressLocality" aria-required="true" />
+        </div>
+
+        <div class="form-group">
+            <label for="edad">Edad</label>
+            <input type="number" id="edad" name="age" min="18" placeholder="Ingresa tu edad" itemprop="birthDate" />
+        </div>
+
+        <div class="form-group">
+            <label for="genero">Género</label>
+            <select id="genero" name="gender" itemprop="gender">
+                <option value="">Selecciona tu género</option>
+                <option value="masculino">Masculino</option>
+                <option value="femenino">Femenino</option>
+                <option value="otro">Otro</option>
+            </select>
+        </div>
+
+        <button type="submit" class="page-btn-green" aria-label="Continuar con la compra" title="Enviar datos de registro">
+            Continuar con la compra <i class="fi fi-rr-credit-card" aria-hidden="true"></i>
+        </button>
+    </form>
+</section>
+
+<script src="/js/cart/registerGuest.js"></script>

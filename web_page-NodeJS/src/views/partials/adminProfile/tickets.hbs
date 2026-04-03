@@ -1,0 +1,57 @@
+<link rel="stylesheet" href="/css/profileAdmin/tickets.css">
+
+<section class="admin-section max-width">
+    <h1>Registro de ordenes de compra</h1>
+    <div class="return">
+        <a href="/perfil-admin" class="page-btn-green" style="font-weight: 600;">Panel del administrador</a>
+    </div>
+    {{#if tickets.docs.length}}
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Comprador</th>
+                <th>Estado</th>
+                <th>Fecha</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each tickets.docs}}
+            <tr>
+                <td data-label="Comprador">
+                    {{#if this.purchaser}}
+                    {{this.purchaser.name}} <br>
+                    <small class="email">{{this.purchaser.email}}</small>
+                    {{else}}
+                    Invitado
+                    {{/if}}
+                </td>
+                <td data-label="Estado" class="status-cont">
+                    <span class="status {{this.status}}">{{this.status}}</span>
+                </td>
+                <td data-label="Fecha">{{formatDate this.createdAt}}</td>
+                <td data-label="Acciones" class="action">
+                    <button class="page-btn-green page-btn" data-id="{{this._id}}" data-action="view">Ver</button>
+                    <button class="page-btn-green page-btn" data-id="{{this._id}}" data-action="pay">Pagado</button>
+                    <button class="page-btn-green page-btn" data-id="{{this._id}}" data-action="process">Proceso</button>
+                    <button class="page-btn-red page-btn" data-id="{{this._id}}" data-action="cancel">Cancelar</button>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <div class="pagination">
+        {{#if tickets.hasPrevPage}}
+        <a href="/dashboard?section=tickets&page={{tickets.prevPage}}" class="page-btn admin">Anterior</a>
+        {{/if}}
+        <span>Página {{tickets.page}} de {{tickets.totalPages}}</span>
+        {{#if tickets.hasNextPage}}
+        <a href="/dashboard?section=tickets&page={{tickets.nextPage}}" class="page-btn admin">Siguiente</a>
+        {{/if}}
+    </div>
+    {{else}}
+    <p class="no-data">No se han generado ventas en la plataforma.</p>
+    {{/if}}
+</section>
+
+<script src="/js/profileAdmin/tickets.js"></script>

@@ -1,0 +1,70 @@
+<link rel="stylesheet" href="/css/profileAdmin/users.css">
+
+<section class="container admin-section max-width">
+    <h1>Usuarios Registrados</h1>
+    <div class="return">
+        <a href="/perfil-admin" class="page-btn-green">Panel del administrador </a>
+    </div>
+    {{#if users.length}}
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Foto</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Rol</th>
+                <th>Teléfono</th>
+                <th>Ciudad</th>
+                <th>Edad</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each users}}
+            <tr>
+                <td data-label="Foto">
+                    {{#if photo}}
+                    <img src="{{photo}}" alt="{{name}}" class="user-avatar" />
+                    {{else}}
+                    <div class="user-avatar placeholder">{{name.[0]}}</div>
+                    {{/if}}
+                </td>
+                <td data-label="Nombre">{{name}}</td>
+                <td data-label="Email">{{email}}</td>
+                <td data-label="Rol"><span class="badge {{role}}">{{role}}</span></td>
+                <td data-label="Teléfono">{{phone}}</td>
+                <td data-label="Ciudad">{{city}}</td>
+                <td data-label="Edad">{{age}}</td>
+                <td data-label="Acciones" class="action">
+                    <button class="page-btn-green page-btn bt view" title="Ver detalles del usuario" data-id="{{_id}}"
+                        data-action="view">Ver</button>
+                    <button class="page-btn-green page-btn bt admin" title="Cambiar rol a administrador" data-id="{{_id}}"
+                        data-action="admin">Admin</button>
+                    <button class="page-btn-green page-btn bt user" title="Cambiar rol a usuario" data-id="{{_id}}"
+                        data-action="user">Usuario</button>
+                    <button class="page-btn-red page-btn bt danger" title="Eliminar usuario" data-id="{{_id}}"
+                        data-action="delete">Eliminar</button>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    <div class="pagination">
+        {{#if pagination.hasPrevPage}}
+        <a href="/dashboard?section=usuarios&page={{subtract pagination.page 1}}" class="page-btn page-btn-green small">Anterior</a>
+        {{/if}}
+
+        <span>Página {{pagination.page}} de {{pagination.totalPages}}</span>
+
+        {{#if pagination.hasNextPage}}
+        <a href="/dashboard?section=usuarios&page={{add pagination.page 1}}" class="page-btn page-btn-green small">Siguiente</a>
+        {{/if}}
+    </div>
+    {{else}}
+    <p class="no-data">No hay usuarios registrados en la plataforma en el momento.</p>
+    {{/if}}
+
+</section>
+
+<script src="/js/profileAdmin/users.js"></script>

@@ -1,0 +1,51 @@
+<link rel="stylesheet" href="/css/ticket/ticketForm.css">
+
+<section class="update ticket-container" id="update-user" role="region"
+    aria-label="Actualizar datos de usuario para ticket" itemscope itemtype="https://schema.org/Order">
+    <div class="container">
+        <form action="#" class="update-form" role="form" aria-label="Formulario de actualización de datos de envío"
+            itemprop="customer" itemscope itemtype="https://schema.org/Person">
+            <div class="title-content">
+                <h1 itemprop="name" class="title">Datos para el envio</h1>
+            </div>
+            <div class="input-group">
+                <label for="name-user-ticket" itemprop="name" title="Nombre completo del comprador">Nombre
+                    completo</label>
+                <input type="text" id="name-user-ticket" name="name" required aria-required="true"
+                    placeholder="Escribe tu nombre completo">
+            </div>
+
+            <div class="input-group">
+                <label for="email-user-ticket" itemprop="email" title="Correo electrónico del comprador">Correo
+                    electrónico</label>
+                <input type="email" id="email-user-ticket" name="email" readonly aria-readonly="true"
+                    placeholder="Tu correo electrónico">
+            </div>
+
+            <div class="input-group">
+                <label for="ciudad-user-ticket" itemprop="addressLocality" title="Ciudad de envío">Ciudad</label>
+                <input type="text" id="ciudad-user-ticket" name="city" required aria-required="true"
+                    placeholder="Ciudad de envío">
+            </div>
+
+            <div class="input-group">
+                <label for="direccion-user-ticket" itemprop="streetAddress" title="Dirección de envío">Dirección</label>
+                <input type="text" id="direccion-user-ticket" name="address" required aria-required="true"
+                    placeholder="Dirección completa de envío">
+            </div>
+
+            <div class="input-group">
+                <label for="telefono-user-ticket" itemprop="telephone" title="Teléfono de contacto">Teléfono</label>
+                <input type="text" id="telefono-user-ticket" name="phone" required aria-required="true"
+                    placeholder="Número de contacto">
+            </div>
+
+            <button type="submit" class="page-btn-green" aria-label="Actualizar datos del ticket"
+                title="Actualizar datos del ticket" data-tooltip="Actualizar datos del ticket">
+                Actualizar datos <i class="fi fi-rr-refresh" aria-hidden="true"></i>
+            </button>
+        </form>
+    </div>
+</section>
+
+<script src="/js/ticket/updateUser.js"></script>

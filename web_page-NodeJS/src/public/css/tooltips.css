@@ -1,0 +1,96 @@
+.profile-actions a[title],
+.btns-account a[title],
+.pet-card-item [title],
+#view-pets[title],
+#assign-gps-form [title],
+#view-tickets[title],
+.error-actions .page-btn[title],
+.denied-actions .page-btn[title],
+.page-btn[title],
+.login-link a[title],
+#view-disabled-persons[title],
+.profile-actions .register-pet-btn[title],
+.btns-account .update-account-btn[title],
+#user-photo[title],
+#user-name[title],
+#update-photo[title],
+#view-vehicles[title],
+.ticket-title[title],
+.ticket-code[title],
+.ticket-date[title],
+.ticket-status[title],
+.section-title[title],
+.ticket-product[title],
+.pay-btn,
+.tracking #search,
+.tracking .search-btn,
+.device-item a.page-btn,
+.cart-img,
+.register-guest-btn,
+.btn-buy,
+.checkout-btn,
+.detail-image img,
+.thumbnail,
+.terms-btn,
+.buy-btn,
+.quantity,
+.tab-btn,
+.service .card {
+    position: relative;
+    cursor: pointer;
+}
+
+[title]::after,
+[data-tooltip]::after {
+    content: attr(title);
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    color: var(--cl--4--);
+    border: 1px solid var(--cl--4--);
+    font-size: 10px;
+    white-space: nowrap;
+    padding: 0.4rem 0.6rem;
+    border-radius: 0.25rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 200;
+}
+
+[data-tooltip]::after {
+    content: attr(data-tooltip);
+}
+
+[title]::before,
+[data-tooltip]::before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 0.4rem solid transparent;
+    border-top-color: var(--cl--4--);
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 200;
+}
+
+[title]:hover::after,
+[title]:hover::before,
+[data-tooltip]:hover::after,
+[data-tooltip]:hover::before {
+    opacity: 1;
+    transform: translateX(-50%) translateY(5px);
+}
+
+@media (max-width: 480px) {
+
+    [title]::after,
+    [title]::before,
+    [data-tooltip]::after,
+    [data-tooltip]::before {
+        display: none;
+    }
+}

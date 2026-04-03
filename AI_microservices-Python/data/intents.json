@@ -1,0 +1,206 @@
+{
+    "intents": [
+        {
+            "tag": "saludo",
+            "patterns": [
+                "Hola",
+                "Buenas",
+                "Qué tal",
+                "Hay alguien ahí?",
+                "Buen día",
+                "Buenas tardes",
+                "Buenas noches",
+                "Hey",
+                "Hola equipo Sentinel",
+                "Hola, necesito ayuda con SentinelTrack"
+            ],
+            "responses": [
+                "¡Hola! Soy SentinelBot, tu asistente virtual de SentinelTrack Systems.",
+                "¡Bienvenido! ¿Quieres consultar información sobre tus dispositivos, rastreo en tiempo real o soporte técnico?"
+            ]
+        },
+        {
+            "tag": "despedida",
+            "patterns": [
+                "Adiós",
+                "Nos vemos",
+                "Hasta luego",
+                "Chao",
+                "Me voy",
+                "Gracias, eso es todo",
+                "Listo, gracias"
+            ],
+            "responses": [
+                "¡Gracias por usar SentinelBot!",
+                "¡Hasta pronto! Tus dispositivos Sentinel siempre estarán protegidos."
+            ]
+        },
+        {
+            "tag": "rastreo_dispositivo",
+            "patterns": [
+                "Dónde está mi dispositivo?",
+                "Ubicación actual del GPS",
+                "Muéstrame el mapa de rastreo",
+                "Quiero ver la ruta en tiempo real"
+            ],
+            "responses": [
+                "Tu dispositivo Sentinel está siendo rastreado en tiempo real. Abre la app para ver el mapa.",
+                "La ubicación se actualiza cada pocos segundos. ¿Quieres que te envíe el último punto registrado?"
+            ]
+        },
+        {
+            "tag": "estado_bateria",
+            "patterns": [
+                "Cuánta batería le queda?",
+                "Nivel de carga del dispositivo",
+                "Necesita cargarse?",
+                "Duración de la batería"
+            ],
+            "responses": [
+                "El dispositivo Sentinel tiene autonomía de hasta 72 horas. Puedes revisar el nivel en la app.",
+                "Te recomiendo cargarlo si baja del 20%."
+            ]
+        },
+        {
+            "tag": "configuracion_dispositivo",
+            "patterns": [
+                "Cómo configuro el GPS?",
+                "Instalación del dispositivo",
+                "Cómo lo activo?",
+                "Configurar dispositivo",
+                "Primer uso"
+            ],
+            "responses": [
+                "Para configurar el GPS, enciéndelo y vincúlalo desde la app SentinelTrack.",
+                "Asegúrate de que el dispositivo esté cargado y conectado antes de iniciar la vinculación."
+            ]
+        },
+        {
+            "tag": "alertas",
+            "patterns": [
+                "Qué alertas puedo recibir?",
+                "Me avisa si se desconecta?",
+                "Notificaciones disponibles",
+                "Alertas de seguridad",
+                "Me avisa si sale de la zona segura?"
+            ],
+            "responses": [
+                "SentinelBot te envía alertas si tu dispositivo sale de la zona segura definida.",
+                "Recibirás notificaciones de batería baja, desconexión y movimientos inusuales."
+            ]
+        },
+        {
+            "tag": "soporte",
+            "patterns": [
+                "Necesito ayuda",
+                "No me funciona",
+                "Tengo un problema",
+                "El GPS no conecta",
+                "No veo la ubicación",
+                "El dispositivo no prende"
+            ],
+            "responses": [
+                "Nuestro equipo de soporte está listo para ayudarte. ¿Puedes darme el número de serie del dispositivo?",
+                "Si el GPS no conecta, revisa que tenga batería y esté en un área con señal."
+            ]
+        },
+        {
+            "tag": "planes_precio",
+            "patterns": [
+                "Cuánto cuesta?",
+                "Precio del dispositivo",
+                "Cuánto vale el módulo?",
+                "Planes disponibles",
+                "Cuánto cuesta la suscripción?"
+            ],
+            "responses": [
+                "El dispositivo Sentinel tiene un costo inicial y ofrecemos planes mensuales de rastreo desde $XX.XXX.",
+                "Puedes elegir entre plan básico, estándar o premium según tus necesidades."
+            ]
+        },
+        {
+            "tag": "envio",
+            "patterns": [
+                "Hacen envíos?",
+                "Cuánto tarda en llegar?",
+                "Envían a mi ciudad?",
+                "Tienen entrega a domicilio?"
+            ],
+            "responses": [
+                "Realizamos envíos a todo el país. El tiempo de entrega depende de tu ciudad.",
+                "En compras superiores a $XXX.XXX el envío es GRATIS."
+            ]
+        },
+        {
+            "tag": "formas_pago",
+            "patterns": [
+                "Qué métodos de pago aceptan?",
+                "Puedo pagar con tarjeta?",
+                "Tienen contraentrega?",
+                "Aceptan Nequi?",
+                "Reciben Daviplata?"
+            ],
+            "responses": [
+                "Aceptamos tarjeta, PSE, Nequi, Daviplata y contraentrega en algunas ciudades.",
+                "También puedes pagar en efectivo si eliges recoger en tienda."
+            ]
+        },
+        {
+            "tag": "agradecimiento",
+            "patterns": [
+                "Gracias",
+                "Muy amable",
+                "Perfecto, gracias",
+                "Mil gracias",
+                "Genial, gracias"
+            ],
+            "responses": [
+                "¡Con gusto!",
+                "¡Gracias a ti por confiar en SentinelTrack y en SentinelBot!"
+            ]
+        },
+        {
+            "tag": "contacto",
+            "patterns": [
+                "Tienen WhatsApp?",
+                "Cómo los contacto?",
+                "Tienen número de teléfono?",
+                "Atención al cliente",
+                "Soporte técnico"
+            ],
+            "responses": [
+                "Puedes escribirnos por WhatsApp al 300 XXX XXXX o por Instagram @SentinelTrack.",
+                "También puedes usar el formulario de contacto en nuestra web oficial."
+            ]
+        },
+        {
+            "tag": "caracteristicas",
+            "patterns": [
+                "Es resistente al agua?",
+                "Funciona en cualquier ciudad?",
+                "Qué cobertura tiene?",
+                "Sirve para vehículos?",
+                "Sirve para mascotas?",
+                "Sirve para personas?"
+            ],
+            "responses": [
+                "El dispositivo Sentinel es resistente al agua y funciona en cualquier ciudad con cobertura GSM.",
+                "SentinelTrack es compatible con múltiples usos: vehículos, mascotas y personas."
+            ]
+        },
+        {
+            "tag": "horarios",
+            "patterns": [
+                "Cuál es el horario?",
+                "A qué hora abren?",
+                "Están abiertos hoy?",
+                "Puedo ir el sábado?",
+                "Horario de atención"
+            ],
+            "responses": [
+                "Nuestro horario de atención es de lunes a sábado de 10am a 6pm.",
+                "Domingos estamos cerrados, pero SentinelBot siempre está disponible en línea."
+            ]
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+.confirm {
+    padding: 6em 0;
+    text-align: center;
+    margin-top: -80px;
+}
+
+.confirm .intro {
+    max-width: 600px;
+    margin: 0 auto 2em;
+    color: var(--cl--1--);
+    text-shadow: var(--txt--shadow--);
+    font-size: 1.1rem;
+}
+
+.confirm-actions {
+    margin-top: 2em;
+}
+

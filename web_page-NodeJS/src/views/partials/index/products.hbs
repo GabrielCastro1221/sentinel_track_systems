@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="/css/index/products.css">
+
+<section class="products container max-width" id="store">
+    <h1>Dispositivos <span>de rastreo</span></h1>
+
+    <div class="filters row">
+        <select name="category" id="category">
+            <option value="all">Todos los productos</option>
+        </select>
+
+        <select name="price" id="price">
+            <option value="all">Todos los precios</option>
+            <option value="low">Menor precio</option>
+            <option value="high">Mayor precio</option>
+        </select>
+
+        <input type="text" placeholder="Buscar producto..." id="search">
+    </div>
+
+    <div class="products__container grid"></div>
+    <div class="pagination"></div>
+</section>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/index/products.js"></script>

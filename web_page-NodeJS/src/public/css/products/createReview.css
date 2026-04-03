@@ -1,0 +1,59 @@
+.review-form {
+    background: var(--bg--2--);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow--);
+    margin-bottom: 30px;
+}
+
+.review-form .form-title {
+    font-size: 1.4rem;
+    color: var(--cl--2--);
+    margin-bottom: 1em;
+    text-align: center;
+}
+
+.review-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-title span {
+    color: var(--cl--2--);
+}
+
+.rating-title {
+    color: var(--cl--2--);
+}
+
+.review-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--shadow--);
+    border-radius: 6px;
+    resize: vertical;
+}
+
+.rating-stars {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: row-reverse;
+    gap: 0.5rem;
+}
+
+.rating-stars input[type="radio"] {
+    display: none;
+}
+
+.rating-stars label {
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: var(--cl--5--);
+    transition: color 0.2s;
+}
+
+.rating-stars input:checked~label,
+.rating-stars label:hover,
+.rating-stars label:hover~label {
+    color: hsl(42, 100%, 50%);
+}

@@ -1,0 +1,15 @@
+<link rel="stylesheet" href="/css/ticket/ticket.css">
+
+{{> main/header}}
+<section class="container ticket-container row flex" role="region"
+    aria-label="Gestión de tickets Sentinel Track Systems" itemscope itemtype="https://schema.org/WebApplication">
+    <div class="form-user" role="form" aria-label="Formulario de tickets" itemscope itemtype="https://schema.org/Order">
+        <meta itemprop="applicationCategory" content="TicketManagement">
+        {{> ticket/ticketForm }}
+    </div>
+    <div class="ticket-content" role="region" aria-label="Listado de tickets" itemscope
+        itemtype="https://schema.org/ItemList">
+        <meta itemprop="applicationCategory" content="TicketManagement">
+        {{> ticket/ticket }}
+    </div>
+</section>

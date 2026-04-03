@@ -1,0 +1,58 @@
+<aside class="cart-summary" role="complementary" aria-label="Resumen de la compra" itemscope
+    itemtype="https://schema.org/Order">
+    <div class="summary-card">
+        <h3 class="summary-title" itemprop="name">Resumen de la compra</h3>
+
+        <div class="summary-row" itemprop="priceSpecification" itemscope
+            itemtype="https://schema.org/PriceSpecification">
+            <span>Subtotal</span>
+            <span id="subtotal" itemprop="priceCurrency" content="COP">$<span
+                    itemprop="price">{{subtotal}}</span></span>
+        </div>
+
+        <div class="label label__city">
+            <label for="city" class="hidden">Selecciona la ciudad de envío</label>
+            <select class="select-field" name="city" id="city" required aria-label="Selecciona la ciudad de envío">
+                <option value="" disabled selected>Selecciona tu ciudad</option>
+                {{#each shipping}}
+                <option value="{{this.amount}}" itemprop="eligibleRegion">{{this.city_ship}}</option>
+                {{/each}}
+            </select>
+        </div>
+
+        <div class="summary-row" itemprop="priceSpecification" itemscope
+            itemtype="https://schema.org/PriceSpecification">
+            <span>Envío</span>
+            <span id="shipping" itemprop="priceCurrency" content="COP">$<span itemprop="price">0</span></span>
+        </div>
+
+        <div class="summary-row total" itemprop="priceSpecification" itemscope
+            itemtype="https://schema.org/PriceSpecification">
+            <span>Total</span>
+            <span id="total" itemprop="priceCurrency" content="COP">$<span itemprop="price">{{total}}</span></span>
+        </div>
+
+        <button class="page-btn checkout-btn" aria-label="Finalizar compra" title="Finalizar compra"
+            data-tooltip="Finalizar compra">
+            Finalizar compra <i class="fi fi-rr-credit-card" aria-hidden="true"></i>
+        </button>
+    </div>
+
+    <div class="cart-act-btn">
+        <a href="/datos-de-envio" class="register-guest-btn" aria-label="Ingresar datos para envío"
+            title="Ingresar datos para envío" data-tooltip="Ingresar datos para envío">
+            Ingresar datos para Envío <i class="fi fi-rr-clipboard-list" aria-hidden="true"></i>
+        </a>
+        <button class="page-btn-green shop-now-btn" aria-label="Comprar ahora" data-tooltip="Comprar ahora">
+            Comprar ahora <i class="fi fi-rr-credit-card" aria-hidden="true"></i>
+        </button>
+        <button class="page-btn-red empty-cart" aria-label="Vaciar carrito" data-tooltip="Vaciar carrito">
+            Vaciar carrito <i class="fi fi-rr-trash" aria-hidden="true"></i>
+        </button>
+        <a href="/#store" class="btn-buy" aria-label="Volver a la tienda" data-tooltip="Volver a la tienda">
+            Volver a la tienda <i class="fi fi-rr-shop" aria-hidden="true"></i>
+        </a>
+    </div>
+</aside>
+
+<script src="/js/cart/btn-guest-signin.js"></script>

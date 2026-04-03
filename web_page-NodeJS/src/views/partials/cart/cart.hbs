@@ -1,0 +1,36 @@
+<div class="cart-items" role="list" aria-label="Lista de productos en el carrito">
+    {{#each cart.products}}
+    <article class="cart-item" role="listitem" itemscope itemtype="https://schema.org/Product">
+        <div class="cart-media">
+            <img src="{{this.product.image}}" alt="{{this.product.title}}" title="Imagen de {{this.product.title}}"
+                data-tooltip="Imagen de {{this.product.title}}" class="cart-img" itemprop="image">
+        </div>
+
+        <div class="cart-info">
+            <h3 class="cart-name" itemprop="name">{{this.product.title}}</h3>
+            <p class="cart-desc" itemprop="description">{{this.product.description}}</p>
+            <div class="cart-meta">
+                <span class="cart-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <strong>Precio:</strong>
+                    <span itemprop="priceCurrency" content="COP">$</span>
+                    <span itemprop="price">{{this.product.price}}</span>
+                    <link itemprop="availability" href="https://schema.org/InStock">
+                </span>
+                <div class="cart-qty-control">
+                    <span class="qty-label"><strong>Cantidad:</strong></span>
+                    <span class="qty-value" itemprop="quantity">{{this.quantity}}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="cart-actions">
+            <button class="page-btn-red remove-btn" data-id="{{this.product._id}}"
+                aria-label="Eliminar {{this.product.title}} del carrito"
+                title="Eliminar {{this.product.title}} del carrito"
+                data-tooltip="Eliminar {{this.product.title}} del carrito">
+                <i class="fi fi-rr-trash" aria-hidden="true"></i> Eliminar
+            </button>
+        </div>
+    </article>
+    {{/each}}
+</div>

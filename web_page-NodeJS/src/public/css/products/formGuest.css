@@ -1,0 +1,62 @@
+.guest-register {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow--green--);
+    margin-top: 120px;
+}
+
+.guest-register h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--cl--5--);
+    text-shadow: var(--txt--shadow--);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--cl--1--);
+    text-shadow: var(--txt--shadow--);
+}
+
+.form-group input,
+.form-group select {
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--cl--5--);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--cl--4--);
+    background: var(--cl--5--);
+    box-shadow: var(--shadow--);
+    outline: none;
+}
+
+.guest-register input::placeholder,
+.guest-register select::placeholder {
+    color: var(--bg--1--);
+    opacity: 1;
+}
+
+.page-btn i {
+    margin-left: 0.5rem;
+}

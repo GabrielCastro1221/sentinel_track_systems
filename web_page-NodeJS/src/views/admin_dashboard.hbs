@@ -1,0 +1,91 @@
+<div class="dash-content container row" id="dashboard" role="region"
+    aria-label="Panel dinámico de administración Sentinel Track Systems" itemscope
+    itemtype="https://schema.org/WebApplication">
+    {{#if (eq section "usuarios")}}
+    <section class="dash-section" role="region" aria-label="Gestión de usuarios" itemscope
+        itemtype="https://schema.org/SoftwareApplication">
+        <meta itemprop="applicationCategory" content="UserManagement">
+        {{> adminProfile/users}}
+    </section>
+    {{/if}}
+
+    {{#if (eq section "productos")}}
+    <section class="dash-section" role="region" aria-label="Gestión de productos" itemscope
+        itemtype="https://schema.org/SoftwareApplication">
+        <meta itemprop="applicationCategory" content="ProductManagement">
+        {{> adminProfile/products}}
+    </section>
+    {{/if}}
+
+    {{#if (eq section "categorias")}}
+    <section class="dash-section" role="region" aria-label="Gestión de categorías" itemscope
+        itemtype="https://schema.org/SoftwareApplication">
+        <meta itemprop="applicationCategory" content="CategoryManagement">
+        {{> adminProfile/categories}}
+    </section>
+    {{/if}}
+
+    {{#if (eq section "gps")}}
+    <section class="dash-section" role="region" aria-label="Gestión de dispositivos GPS" itemscope
+        itemtype="https://schema.org/SoftwareApplication">
+        <meta itemprop="applicationCategory" content="GPSManagement">
+        {{> adminProfile/gpsDevices}}
+    </section>
+    {{/if}}
+
+    {{#if (eq section "configCompany")}}
+    <section class="dash-section" role="region" aria-label="Configuración de la compañía" itemscope
+        itemtype="https://schema.org/SoftwareApplication">
+        <meta itemprop="applicationCategory" content="CompanyConfiguration">
+        {{> adminProfile/configCompany}}
+    </section>
+    {{/if}}
+
+    {{#if (eq section "configPage")}}
+    <section class="dash-section" role="region" aria-label="Configuración de página" itemscope
+        itemtype="https://schema.org/SoftwareApplication">
+        <meta itemprop="applicationCategory" content="PageConfiguration">
+        {{> adminProfile/configPage}}
+    </section>
+    {{/if}}
+
+    {{#if (eq section "envios")}}
+    <section class="dash-section" role="region" aria-label="Gestión de envíos" itemscope
+        itemtype="https://schema.org/SoftwareApplication">
+        <meta itemprop="applicationCategory" content="ShippingManagement">
+        {{> adminProfile/shipping}}
+    </section>
+    {{/if}}
+
+    {{#if (eq section "mascotas")}}
+    <section class="dash-section" role="region" aria-label="Gestión de mascotas" itemscope
+        itemtype="https://schema.org/SoftwareApplication">
+        <meta itemprop="applicationCategory" content="PetManagement">
+        {{> adminProfile/pets}}
+    </section>
+    {{/if}}
+
+    {{#if (eq section "vehiculos")}}
+    <section class="dash-section" role="region" aria-label="Gestión de vehículos" itemscope
+        itemtype="https://schema.org/SoftwareApplication">
+        <meta itemprop="applicationCategory" content="VehicleManagement">
+        {{> adminProfile/vehicles}}
+    </section>
+    {{/if}}
+
+    {{#if (eq section "discapacitados")}}
+    <section class="dash-section" role="region" aria-label="Gestión de personas discapacitadas" itemscope
+        itemtype="https://schema.org/SoftwareApplication">
+        <meta itemprop="applicationCategory" content="DisabledPersonManagement">
+        {{> adminProfile/disabledPerson}}
+    </section>
+    {{/if}}
+
+    {{#if (eq section "tickets")}}
+    <section class="dash-section" role="region" aria-label="Gestión de tickets" itemscope
+        itemtype="https://schema.org/SoftwareApplication">
+        <meta itemprop="applicationCategory" content="TicketManagement">
+        {{> adminProfile/tickets}}
+    </section>
+    {{/if}}
+</div>

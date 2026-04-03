@@ -1,0 +1,310 @@
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    margin: 2em 0;
+    padding: 1em 1.5em;
+    border-radius: 12px;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: -30px;
+}
+
+.products {
+    margin-top: -10px;
+}
+
+.filters select,
+.filters input[type="text"] {
+    padding: 0.6em 1em;
+    border: 1px solid var(--cl--4--);
+    border-radius: 8px;
+    font-size: 1rem;
+    color: var(--cl--5--);
+    background: var(--bg--1--);
+    transition: all 0.3s ease;
+    flex: 1;
+    min-width: 200px;
+}
+
+.filters select:hover,
+.filters input[type="text"]:hover {
+    border-color: var(--cl--5--);
+    box-shadow: var(--shadow--);
+    transform: translateY(-2px);
+}
+
+.filters select:focus,
+.filters input[type="text"]:focus {
+    outline: none;
+    border-color: var(--cl--5--);
+    box-shadow: var(--shadow--);
+}
+
+.filters input[type="text"]::placeholder {
+    color: var(--cl--5--);
+    font-style: italic;
+}
+
+.products__container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.products__container {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.product__item {
+    border-radius: 1.5rem;
+    transition: all .2s ease;
+    width: 100%;
+    box-shadow: var(--shadow--green--);
+}
+
+.product__banner {
+    padding: 0.625rem 0.75rem 0.75rem;
+}
+
+.product__banner,
+.product__images {
+    position: relative;
+}
+
+.product__category {
+    text-transform: capitalize;
+}
+
+.product__images {
+    display: block;
+    overflow: hidden;
+    border-radius: 1.25rem;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    position: relative;
+    max-width: 100%;
+}
+
+.product__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    vertical-align: middle;
+    transition: all 1.5s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.product__item:hover .product__img {
+    transform: scale(1.1);
+}
+
+.product__img.hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.product__actions {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    column-gap: 0.5rem;
+    transition: all .2s ease;
+}
+
+.action__btn {
+    width: 40px;
+    height: 40px;
+    line-height: 42px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: var(--bg--1--);
+    border: 1px solid var(--cl--4--);
+    color: var(--cl--5--);
+    font-size: 14px;
+    position: relative;
+}
+
+.action__btn::before,
+.action__btn::after {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: all 0.3s cubic-bezier(0.71, 1.7, 0.77, 1.24);
+}
+
+.action__btn::before {
+    content: "";
+    top: -2px;
+    border: .5rem solid transparent;
+    border-top-color: var(--cl--4--);
+}
+
+.action__btn::after {
+    content: attr(aria-label);
+    bottom: 100%;
+    background-color: var(--bg--2--);
+    color: var(--cl--4--);
+    font-size: 14px;
+    white-space: nowrap;
+    padding-inline: 0.625rem;
+    border-radius: 0.25rem;
+    line-height: 2.58;
+    text-shadow: var(--txt--shadow--);
+}
+
+.product__badge {
+    position: absolute;
+    left: 1.25rem;
+    top: 1.25rem;
+    background-color: var(--cl--1--);
+    color: var(--cl--1--);
+    padding: 0.25rem 0.625rem;
+    border-radius: 2.5rem;
+    font-size: 14px;
+    text-shadow: var(--txt--shadow--);
+}
+
+.product__badge.light-pink {
+    background-color: hsl(330, 40%, 85%);
+    color: var(--bg--1--);
+    font-weight: 600;
+}
+
+.product__badge.light-green {
+    background-color: hsl(150, 40%, 80%);
+    color: var(--bg--1--);
+    font-weight: 600;
+}
+
+.product__badge.light-orange {
+    background-color: hsl(24, 60%, 85%);
+    color: var(--bg--1--);
+    font-weight: 600;
+}
+
+.product__badge.light-blue {
+    background-color: hsl(202, 40%, 85%);
+    color: var(--bg--1--);
+    font-weight: 600;
+}
+
+
+.product__content {
+    display: grid;
+    padding: 0 1.25rem 1.125rem;
+    position: relative;
+}
+
+.product__category {
+    color: var(--cl--1--);
+    font-size: 14px;
+    text-shadow: var(--txt--shadow--);
+}
+
+.product__title {
+    font-size: 14px;
+    margin-block: 0.75rem 0.5rem;
+    color: var(--cl--4--);
+    text-transform: uppercase;
+    text-shadow: var(--txt--shadow--);
+}
+
+.product__rating {
+    margin-top: 20px;
+    padding: 8px;
+    color: hsl(42, 100%, 50%);
+    text-shadow: var(--txt--shadow--);
+}
+
+.product__rating span {
+    color: var(--cl--1--);
+    font-size: 18px;
+    margin-bottom: 0.75rem;
+    margin-top: 10px;
+}
+
+.product__price .new__price {
+    font-size: 18px;
+    text-transform: uppercase;
+    text-shadow: var(--txt--shadow--);
+}
+
+.cart__btn {
+    position: absolute;
+    bottom: 1.6rem;
+    right: 1.25rem;
+    cursor: pointer;
+}
+
+.tab__btn.active-tab {
+    color: var(--cl--1--);
+    background-color: var(--cl--2--);
+}
+
+.tab__item:not(.active-tab) {
+    display: none;
+}
+
+.product__img.hover,
+.product__actions,
+.action__btn::before,
+.action__btn::after,
+.product__item:hover .product__img.default {
+    opacity: 0;
+}
+
+.new__price {
+    color: var(--cl--1--);
+}
+
+.product__item:hover .product__img.hover,
+.product__item:hover .product__actions,
+.action__btn:hover::before,
+.action__btn:hover::after {
+    opacity: 1;
+}
+
+.action__btn:hover::before,
+.action__btn:hover::after {
+    transform: translateX(-50%) translateY(-0.5rem);
+}
+
+.action__btn:hover {
+    background-color: var(--bg--2--);
+    border-color: var(--cl--4--);
+    color: var(--cl--5--);
+}
+
+.total__products {
+    margin-bottom: 2.5rem;
+}
+
+.total__products span {
+    color: var(--cl--1--);
+    font-weight: 600;
+}
+
+@media screen and (max-width: 1200px) {
+    .products__container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .products__container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .products__container {
+        grid-template-columns: 1fr;
+    }
+}

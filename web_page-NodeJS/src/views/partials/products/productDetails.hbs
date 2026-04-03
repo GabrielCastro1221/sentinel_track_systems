@@ -1,0 +1,79 @@
+<section class="product-detail container" role="region" aria-label="Detalle del producto" itemscope
+    itemtype="https://schema.org/Product">
+    <div class="detail-grid">
+        <div class="container detail-image">
+            <img src="{{product.image}}" alt="{{product.title}}" title="Imagen principal de {{product.title}}"
+                data-tooltip="Imagen principal de {{product.title}}" itemprop="image">
+
+            <div class="thumbnail-row thumb" role="list" aria-label="Imágenes en miniatura del producto">
+                {{#each product.thumbnail}}
+                <img src="{{this.url}}" alt="Vista en miniatura {{@index}} de {{../product.title}}"
+                    title="Miniatura {{@index}} de {{../product.title}}"
+                    data-tooltip="Miniatura {{@index}} de {{../product.title}}" class="thumbnail" itemprop="image">
+                {{/each}}
+            </div>
+        </div>
+
+        <div class="detail-info">
+            <h2 class="detail-title" itemprop="name">{{product.title}}</h2>
+
+            <p class="detail-brand white" itemprop="aggregateRating" itemscope
+                itemtype="https://schema.org/AggregateRating">
+                <strong>Calificación:</strong>
+                <i class="i fi fi-bs-star"></i>
+                <span itemprop="ratingValue">{{toFixed product.averageRating 2}}</span> / 5
+                <meta itemprop="reviewCount" content="25">
+            </p>
+
+            <p class="detail-description" itemprop="description">{{product.description}}</p>
+            <p class="detail-brand white"><strong>Marca:</strong> <span itemprop="brand">{{product.brand}}</span></p>
+            <p class="detail-category white"><strong>Categoría:</strong> <span
+                    itemprop="category">{{product.category}}</span></p>
+            <p class="detail-code white"><strong>Código:</strong> <span itemprop="sku">{{product.code}}</span></p>
+            <p class="detail-stock white"><strong>Stock:</strong>
+                <span itemprop="availability" content="https://schema.org/InStock">{{product.stock}}</span> unidades disponibles.
+            </p>
+
+            <ul class="product__list" aria-label="Beneficios y opciones de compra">
+                <li class="list__item flex white">
+                    <i class="fi fi-rr-camera-cctv icon"></i>
+                    Protegemos tu dinero
+                </li>
+                <li class="list__item flex">
+                    <i class="fi fi-rr-selling icon"></i>
+                    <a href="#" class="policy terms-btn" rel="nofollow">Consultar políticas de reembolso</a>
+                </li>
+                <li class="list__item flex white">
+                    <i class="fi fi-rr-shipping-fast icon"></i>
+                    Envío contra entrega disponible
+                </li>
+            </ul>
+
+            {{> products/refundPoliciesModal}}
+
+            <p class="detail-price white" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                <span itemprop="priceCurrency" content="COP">$</span><span itemprop="price">{{product.price}}</span>
+                <link itemprop="availability" href="https://schema.org/InStock">
+                <meta itemprop="url" content="https://www.sentineltrack.com/producto/{{product._id}}">
+            </p>
+
+            <div class="details__actions">
+                <form class="add-to-cart-form" data-product-id="{{product._id}}" data-stock="{{product.stock}}"
+                    data-cart-id="{{cartId}}" aria-label="Formulario para agregar al carrito">
+                    <label for="quantity" class="quantity-label white">Seleccionar cantidad:</label>
+                    <input type="number" id="quantity" class="quantity text-light ms-1" value="1" min="1"
+                        max="{{product.stock}}" aria-label="Cantidad de {{product.title}}"
+                        title="Selecciona la cantidad de {{product.title}}"
+                        data-tooltip="Selecciona la cantidad de {{product.title}}">
+                    <button type="submit" class="page-btn-green add-cart-btn" aria-label="Agregar {{product.title}} al carrito"
+                        title="Agregar {{product.title}} al carrito"
+                        data-tooltip="Agregar {{product.title}} al carrito">
+                        Agregar al carrito <i class="fi fi-rr-shopping-cart-add"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="/js/products/cart.js"></script>

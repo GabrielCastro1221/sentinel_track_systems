@@ -1,0 +1,51 @@
+<div class="btns-account" role="navigation" aria-label="Gestión de cuenta">
+    <a href="#" class="page-btn-green" id="update-account-btn" aria-label="Editar mis datos" title="Editar mis datos"
+        itemprop="url">
+        <i class="fi fi-rr-edit" aria-hidden="true"></i> Editar mis datos
+    </a>
+    <a href="#" class="page-btn-red log" id="delete-account-btn" aria-label="Eliminar cuenta" title="Eliminar cuenta"
+        itemprop="url">
+        <i class="fi fi-rr-trash" aria-hidden="true"></i> Eliminar cuenta
+    </a>
+    <a href="#" class="page-btn-red log" id="logout" aria-label="Cerrar sesión" title="Salir" itemprop="url">
+        <i class="fi fi-rr-exit" aria-hidden="true"></i> Salir
+    </a>
+</div>
+
+<div class="profile-actions" role="navigation" aria-label="Acciones de perfil" itemscope
+    itemtype="https://schema.org/WebPageElement">
+    <a href="#" class="page-btn-green" id="register-pet" aria-label="Registrar mascota" title="Registro de mascotas"
+        itemprop="url">
+        <i class="fi fi-rr-paw" aria-hidden="true"></i> Registro de mascotas
+    </a>
+    <a href="#" class="page-btn-green" id="register-vehicle" aria-label="Registrar vehículo"
+        title="Registro de vehículos" itemprop="url">
+        <i class="fi fi-rr-car" aria-hidden="true"></i> Registro de vehículos
+    </a>
+    <a href="#" class="page-btn-green" id="register-person-with-disability"
+        aria-label="Registrar persona con discapacidad" title="Registro de personas discapacitadas" itemprop="url">
+        <i class="fi fi-rr-wheelchair" aria-hidden="true"></i> Registro de personas discapacitadas
+    </a>
+</div>
+
+<div class="cards selectable" role="region" aria-label="Tarjetas de perfil">
+    <div class="card" data-value="pet" itemscope itemtype="https://schema.org/CreativeWork">
+        {{> userProfile/petCards }}
+    </div>
+    <div class="card" data-value="tickets" itemscope itemtype="https://schema.org/CreativeWork">
+        {{> userProfile/ticketsCards }}
+    </div>
+    <div class="card" data-value="vehicle" itemscope itemtype="https://schema.org/CreativeWork">
+        {{> userProfile/vehicleCards }}
+    </div>
+    <div class="card" data-value="disabledPerson" itemscope itemtype="https://schema.org/CreativeWork">
+        {{> userProfile/disabledPersonCards }}
+    </div>
+</div>
+
+
+
+<script src="/js/profileUser/registerPet.js"></script>
+<script src="/js/profileUser/registerVehicle.js"></script>
+<script src="/js/profileUser/registerPersonWithDisability.js"></script>
+<script src="/js/profileUser/tabs.js"></script>

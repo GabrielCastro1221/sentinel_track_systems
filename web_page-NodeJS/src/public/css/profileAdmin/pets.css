@@ -1,0 +1,169 @@
+.admin-section {
+    margin: 2rem 0;
+    border-radius: 12px;
+    width: 100%;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: var(--shadow--green--);
+    font-size: 0.85rem;
+}
+
+.admin-table th {
+    background: var(--bg--1--);
+    color: var(--cl--5--);
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.admin-table tr:hover {
+    background: var(--bg--2--);
+}
+
+.pet-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.pet-avatar.placeholder {
+    width: 40px;
+    height: 40px;
+    background: var(--cl--5--);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: var(--cl--3--);
+    border-radius: 50%;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 0.6rem;
+    text-align: center;
+    border-bottom: 1px solid var(--cl--3--);
+    vertical-align: middle;
+}
+
+.admin-table td {
+    color: var(--cl--5--);
+    text-shadow: var(--txt--shadow--);
+    font-size: 14px;
+}
+
+.add-pet {
+    margin-top: 2rem;
+    padding: 1rem;
+    border-top: 1px solid var(--cl--3--);
+}
+
+.add-pet h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+    color: var(--cl--3--);
+}
+
+.add-pet form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.add-pet input {
+    flex: 1 1 45%;
+    padding: 0.5rem;
+    border: 1px solid var(--cl--3--);
+    border-radius: 6px;
+    font-size: 0.85rem;
+}
+
+.file-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    color: var(--cl--3--);
+    display: block;
+}
+
+.file-input {
+    padding: 0.4rem;
+    border: 1px solid var(--cl--3--, #ccc);
+    border-radius: 6px;
+    font-size: 0.85rem;
+    background-color: var(--cl--1--, #fff);
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.gps-link {
+    color: var(--cl--3--);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.gps-link:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+
+    .admin-table,
+    .admin-table thead,
+    .admin-table tbody,
+    .admin-table th,
+    .admin-table td,
+    .admin-table tr {
+        display: block;
+        width: 100%;
+    }
+
+    .admin-table thead {
+        display: none;
+    }
+
+    .admin-table tr {
+        margin-bottom: 1rem;
+        border-radius: 8px;
+        padding: 1rem;
+        box-shadow: var(--shadow--);
+    }
+
+    .admin-table td {
+        border: none;
+        padding: 0.5rem 0;
+        text-align: left;
+        position: relative;
+    }
+
+    .admin-table td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: var(--cl--2--);
+        display: block;
+        margin-bottom: 0.2rem;
+    }
+
+    .pet-avatar {
+        margin-bottom: 0.5rem;
+    }
+
+    .action {
+        margin-top: 0.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.3rem;
+        justify-content: flex-start;
+    }
+
+    .add-pet form {
+        flex-direction: column;
+    }
+
+    .add-pet input {
+        flex: 1 1 100%;
+    }
+}

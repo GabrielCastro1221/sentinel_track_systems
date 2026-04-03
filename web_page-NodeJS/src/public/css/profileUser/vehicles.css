@@ -1,0 +1,134 @@
+.vehicles-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 1em;
+}
+
+.vehicle-card-item {
+    border-radius: 12px;
+    box-shadow: var(--shadow--green--);
+    padding: 1em;
+    display: flex;
+    background: var(--bg--2--);
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.vehicle-photo img {
+    width: 140px;
+    height: 90px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 2px solid var(--cl--3--);
+    margin-bottom: 10px;
+}
+
+.vehicle-photo .no-photo {
+    width: 140px;
+    height: 90px;
+    border-radius: 10px;
+    background: var(--cl--5--);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    color: var(--cl--4--);
+    text-shadow: var(--txt--shadow--);
+    margin-bottom: 10px;
+}
+
+.vehicle-info h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--cl--2--);
+    margin-bottom: 0.5em;
+    text-align: center;
+}
+
+.vehicle-info p {
+    font-size: 0.9rem;
+    color: var(--cl--5--);
+    text-shadow: var(--txt--shadow--);
+    margin: 0.2em 0;
+    text-align: center;
+}
+
+.vehicle-info strong {
+    font-weight: 600;
+    color: var(--cl--3--);
+    text-shadow: var(--txt--shadow--);
+}
+
+.vehicle-actions {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.edit-vehicle-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 1rem;
+    background: var(--cl--1--);
+    border-radius: 12px;
+}
+
+.edit-vehicle-form label {
+    font-weight: 600;
+    color: var(--bg--1--);
+    margin-bottom: 4px;
+}
+
+.edit-vehicle-form .swal2-input,
+.edit-vehicle-form .swal-input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--cl--5--);
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: var(--cl--1--);
+    color: var(--bg--1--);
+}
+
+.edit-vehicle-form .swal2-input:focus,
+.edit-vehicle-form .swal-input:focus {
+    background: var(--cl--1--);
+    outline: none;
+}
+
+.edit-vehicle-form .swal2-file {
+    border: 1px dashed var(--cl--5--);
+    border-radius: 8px;
+    padding: 8px;
+    background: var(--cl--1--);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.edit-vehicle-form .swal2-file:hover {
+    border-color: var(--cl--4--);
+}
+
+.edit-vehicle-form .img-vehicle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 10px;
+    box-shadow: var(--shadow--green--);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 600px) {
+    .vehicles-list {
+        grid-template-columns: 1fr;
+    }
+}

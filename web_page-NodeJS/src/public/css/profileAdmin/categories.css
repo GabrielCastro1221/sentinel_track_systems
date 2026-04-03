@@ -1,0 +1,136 @@
+.admin-section {
+    width: 100%;
+    border-radius: 12px;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    box-shadow: var(--shadow--green--);
+}
+
+.admin-table th,
+.admin-table td {
+    text-align: center;
+    border-bottom: 1px solid var(--cl--3--);
+    padding: 0.6rem;
+}
+
+.admin-table th {
+    background: var(--bg--1--);
+    color: var(--cl--5--);
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.admin-table tr:hover {
+    background: var(--bg--2--);
+}
+
+.category {
+    color: var(--cl--4--);
+    text-shadow: var(--txt--shadow--);
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.add-category {
+    margin-top: 2rem;
+    padding: 1rem;
+}
+
+.page-btn {
+    color: var(--cl--5--);
+}
+
+.add-category h3 {
+    text-align: center;
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+    color: var(--cl--4--);
+}
+
+.add-category form {
+    display: flex;
+    gap: 10px;
+}
+
+.add-category input {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid var(--cl--3--);
+    border-radius: 6px;
+    font-size: 0.85rem;
+}
+
+#addCategoryForm {
+    padding: 14px;
+    box-shadow: var(--shadow--green--);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.user {
+    width: 100%;
+    margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+
+    .admin-table,
+    .admin-table thead,
+    .admin-table tbody,
+    .admin-table th,
+    .admin-table td,
+    .admin-table tr {
+        display: block;
+        width: 100%;
+    }
+
+    .admin-table thead {
+        display: none;
+    }
+
+    .admin-table tr {
+        margin-bottom: 1rem;
+        border-radius: 8px;
+        padding: 1rem;
+        box-shadow: var(--shadow--);
+    }
+
+    .admin-table td {
+        border: none;
+        padding: 0.5rem 0;
+        text-align: left;
+        position: relative;
+    }
+
+    .admin-table td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: var(--cl--2--);
+        display: block;
+        margin-bottom: 0.2rem;
+    }
+
+    .action {
+        margin-top: 0.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.3rem;
+        justify-content: flex-start;
+    }
+
+    .add-category form {
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,35 @@
+<link rel="stylesheet" href="/css/auth/reset-password.css">
+
+{{> main/header}}
+<section class="change-password" id="change-password" role="region" aria-label="Solicitud de cambio de contraseña"
+    itemscope itemtype="https://schema.org/WebApplication">
+    <div class="container max-width">
+        <h1 itemprop="name" title="Solicitar Cambio de Contraseña">Solicitar Cambio de Contraseña</h1>
+
+        <p class="intro" itemprop="description" title="Instrucciones para solicitar cambio de contraseña">
+            Ingresa tu correo electrónico y te enviaremos un enlace para cambiar tu contraseña.
+        </p>
+
+        <form action="/api/v1/auth/requestPasswordReset" method="POST" class="change-form" role="form"
+            aria-label="Formulario de solicitud de cambio de contraseña" itemprop="potentialAction" itemscope
+            itemtype="https://schema.org/ResetPassword">
+            <div class="input-group">
+                <input type="email" id="email" name="email" placeholder="Ingresa tu correo electrónico" required
+                    aria-required="true">
+            </div>
+            <button type="submit" class="page-btn-green" aria-label="Solicitar cambio de contraseña"
+                title="Solicitar cambio de contraseña" data-tooltip="Solicitar cambio de contraseña">
+                Solicitar cambio <i class="fi fi-rr-envelope" aria-hidden="true"></i>
+            </button>
+        </form>
+
+        {{#if error}}
+        <p class="error-message" role="alert" title="Mensaje de error">{{ error }}</p>
+        {{/if}}
+
+        <p class="login-link" title="Acceso directo al inicio de sesión">
+            ¿Ya recuerdas tu contraseña? <a href="/login" aria-label="Ir al inicio de sesión"
+                title="Ir al inicio de sesión">Inicia sesión aquí</a>
+        </p>
+    </div>
+</section>
