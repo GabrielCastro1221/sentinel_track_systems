@@ -26,6 +26,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const cartId = window.location.pathname.split("/").pop();
 
+    const swalConfig = {
+        background: "var(--bg--2--)",
+        color: "var(--cl--5--)",
+        customClass: {
+            popup: "swal-custom-popup",
+            confirmButton: "swal-custom-confirm",
+            cancelButton: "swal-custom-cancel"
+        }
+    };
+
     async function removeProduct(productId) {
         try {
             const response = await fetch(`/api/v1/cart/${cartId}/products/${productId}`, {
@@ -38,6 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.log("Producto eliminado:", data);
 
                 Swal.fire({
+                    ...swalConfig,
                     icon: "success",
                     title: "Producto eliminado",
                     text: "El producto fue eliminado del carrito.",
@@ -47,6 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             } else {
                 Swal.fire({
+                    ...swalConfig,
                     icon: "error",
                     title: "Error",
                     text: "No se pudo eliminar el producto."
@@ -55,6 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch (error) {
             console.error("Error de conexión:", error);
             Swal.fire({
+                ...swalConfig,
                 icon: "error",
                 title: "Error de conexión",
                 text: "Hubo un problema al intentar eliminar el producto."
@@ -74,6 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.log("Carrito vaciado:", data);
 
                 Swal.fire({
+                    ...swalConfig,
                     icon: "success",
                     title: "Carrito vaciado",
                     text: "Todos los productos fueron eliminados.",
@@ -83,6 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             } else {
                 Swal.fire({
+                    ...swalConfig,
                     icon: "error",
                     title: "Error",
                     text: "No se pudo vaciar el carrito."
@@ -91,6 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch (error) {
             console.error("Error de conexión:", error);
             Swal.fire({
+                ...swalConfig,
                 icon: "error",
                 title: "Error de conexión",
                 text: "Hubo un problema al intentar vaciar el carrito."
@@ -101,6 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (emptyCartBtn) {
         emptyCartBtn.addEventListener("click", () => {
             Swal.fire({
+                ...swalConfig,
                 title: "¿Estás seguro?",
                 text: "Esto eliminará todos los productos del carrito.",
                 icon: "warning",
@@ -119,6 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
         btn.addEventListener("click", (e) => {
             const productId = e.currentTarget.dataset.id;
             Swal.fire({
+                ...swalConfig,
                 title: "¿Eliminar producto?",
                 text: "Este producto será eliminado del carrito.",
                 icon: "warning",

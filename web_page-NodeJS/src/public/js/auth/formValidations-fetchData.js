@@ -32,17 +32,31 @@ document.addEventListener("DOMContentLoaded", () => {
                         duration: 3000,
                         gravity: "top",
                         position: "right",
-                        backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)"
+                        style: {
+                            color: "var(--cl--5--)",
+                            background: "var(--bg--2--)",
+                            border: "1px solid var(--cl--4--)",
+                            fontWeight: "600",
+                            borderRadius: "8px",
+                            padding: "10px 25px",
+                            textDecoration: "none",
+                            transition: "all 0.3s ease",
+                            cursor: "pointer"
+                        }
                     }).showToast();
 
                     setTimeout(() => {
                         if (user.role === "admin") {
-                            window.location.href = "/perfil-admin";
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Acceso denegado',
+                                text: 'Solo los usuarios con rol "usuario" pueden ingresar a la web',
+                                confirmButtonText: 'Entendido'
+                            });
                         } else {
                             window.location.href = "/perfil-usuario";
                         }
                     }, 1500);
-
                 } else {
                     alert(data.message || "Error al iniciar sesión.");
                 }
@@ -74,14 +88,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 const data = await response.json();
                 if (response.ok) {
-                    console.log("Registro exitoso:", data);
-
                     Toastify({
                         text: "Registro exitoso",
                         duration: 3000,
                         gravity: "top",
                         position: "right",
-                        backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)"
+                        style: {
+                            color: "var(--cl--5--)",
+                            background: "var(--bg--2--)",
+                            border: "1px solid var(--cl--4--)",
+                            fontWeight: "600",
+                            borderRadius: "8px",
+                            padding: "10px 25px",
+                            textDecoration: "none",
+                            transition: "all 0.3s ease",
+                            cursor: "pointer"
+                        }
                     }).showToast();
 
                     setTimeout(() => {

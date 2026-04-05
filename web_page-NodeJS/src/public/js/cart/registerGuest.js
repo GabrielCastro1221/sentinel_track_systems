@@ -1,6 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("register-guest-form");
 
+    const swalConfig = {
+        background: "var(--bg--2--)",
+        color: "var(--cl--5--)",
+        customClass: {
+            popup: "swal-custom-popup",
+            confirmButton: "swal-custom-confirm",
+            cancelButton: "swal-custom-cancel"
+        }
+    };
+
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
@@ -36,27 +46,30 @@ document.addEventListener("DOMContentLoaded", () => {
                 localStorage.removeItem("guestId");
 
                 Swal.fire({
+                    ...swalConfig,
                     icon: "success",
                     title: "Registro exitoso",
                     text: "Tu cuenta de invitado fue registrada correctamente",
-                    confirmButtonColor: "#00ff88"
+                    confirmButtonText: "OK"
                 }).then(() => {
                     window.location.href = `/cart/${data.cart._id}`;
                 });
             } else {
                 Swal.fire({
+                    ...swalConfig,
                     icon: "error",
                     title: "Error",
                     text: data.message || "Error al registrar invitado",
-                    confirmButtonColor: "#ff3c3c"
+                    confirmButtonText: "Entendido"
                 });
             }
         } catch (error) {
             Swal.fire({
+                ...swalConfig,
                 icon: "error",
                 title: "Error de conexión",
                 text: "No se pudo registrar el invitado",
-                confirmButtonColor: "#ff3c3c"
+                confirmButtonText: "Entendido"
             });
         }
     });

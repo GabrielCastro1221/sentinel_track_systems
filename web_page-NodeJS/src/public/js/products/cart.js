@@ -35,7 +35,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 duration: 3000,
                 gravity: "top",
                 position: "right",
-                backgroundColor: "#ff0000"
+                style: {
+                    color: "var(--cl--5--)",
+                    background: "var(--bg--2--)",
+                    border: "1px solid var(--cl--4--)",
+                    fontWeight: "600",
+                    borderRadius: "8px",
+                    padding: "10px 25px",
+                    textDecoration: "none",
+                    transition: "all 0.3s ease",
+                    cursor: "pointer"
+                }
             }).showToast();
             return;
         }
@@ -57,9 +67,19 @@ document.addEventListener("DOMContentLoaded", () => {
                     duration: 2000,
                     gravity: "top",
                     position: "right",
-                    backgroundColor: "#4CAF50",
+                    style: {
+                        color: "var(--cl--5--)",
+                        background: "var(--bg--2--)",
+                        border: "1px solid var(--cl--4--)",
+                        fontWeight: "600",
+                        borderRadius: "8px",
+                        padding: "10px 25px",
+                        textDecoration: "none",
+                        transition: "all 0.3s ease",
+                        cursor: "pointer"
+                    },
                     callback: () => {
-                        window.location.href = isGuest ? `/cart/${cid}` : `/cart/${cid}`;
+                        window.location.href = `/cart/${cid}`;
                     }
                 }).showToast();
             } else {
@@ -69,7 +89,17 @@ document.addEventListener("DOMContentLoaded", () => {
                     duration: 3000,
                     gravity: "top",
                     position: "right",
-                    backgroundColor: "#ff0000"
+                    style: {
+                        color: "var(--cl--5--)",
+                        background: "var(--bg--2--)",
+                        border: "1px solid var(--cl--4--)",
+                        fontWeight: "600",
+                        borderRadius: "8px",
+                        padding: "10px 25px",
+                        textDecoration: "none",
+                        transition: "all 0.3s ease",
+                        cursor: "pointer"
+                    }
                 }).showToast();
             }
         } catch (error) {
@@ -79,7 +109,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 duration: 3000,
                 gravity: "top",
                 position: "right",
-                backgroundColor: "#ff0000"
+                style: {
+                    color: "var(--cl--5--)",
+                    background: "var(--bg--2--)",
+                    border: "1px solid var(--cl--4--)",
+                    fontWeight: "600",
+                    borderRadius: "8px",
+                    padding: "10px 25px",
+                    textDecoration: "none",
+                    transition: "all 0.3s ease",
+                    cursor: "pointer"
+                }
             }).showToast();
         }
     });

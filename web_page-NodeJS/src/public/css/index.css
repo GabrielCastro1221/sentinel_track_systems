@@ -202,6 +202,25 @@ ul {
     outline: none;
 }
 
+.swal-custom-confirm {
+    background: var(--bg--2--);
+    color: var(--cl--5--);
+    border: 1px solid var(--cl--4--);
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 10px 25px;
+    cursor: pointer;
+}
+
+.swal-custom-cancel {
+    background: transparent;
+    color: var(--cl--5--);
+    border: 1px solid var(--cl--4--);
+    border-radius: 8px;
+    padding: 10px 25px;
+    cursor: pointer;
+}
+
 .hidden {
     display: none !important;
 }

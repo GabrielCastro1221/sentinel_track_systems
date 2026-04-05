@@ -10,14 +10,28 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const form = document.querySelector(".update-form");
+
+    // Configuración base para Swal con tus estilos
+    const swalConfig = {
+        background: "var(--bg--2--)",
+        color: "var(--cl--5--)",
+        customClass: {
+            popup: "swal-custom-popup",
+            confirmButton: "swal-custom-confirm",
+            cancelButton: "swal-custom-cancel"
+        }
+    };
+
     form?.addEventListener("submit", async (e) => {
         e.preventDefault();
 
         if (!userData?._id) {
             Swal.fire({
+                ...swalConfig,
                 icon: "warning",
                 title: "Usuario no encontrado",
                 text: "Debes iniciar sesión para actualizar tus datos",
+                confirmButtonText: "Entendido"
             });
             return;
         }
@@ -43,25 +57,31 @@ document.addEventListener("DOMContentLoaded", () => {
                 localStorage.setItem("user", JSON.stringify({ ...userData, ...payload }));
 
                 Swal.fire({
+                    ...swalConfig,
                     icon: "success",
                     title: "Datos actualizados",
                     text: "Tu información se ha guardado correctamente",
+                    confirmButtonText: "OK"
                 }).then(() => {
                     location.reload();
                 });
             } else {
                 Swal.fire({
+                    ...swalConfig,
                     icon: "error",
                     title: "Error",
                     text: data.error || "No se pudo actualizar la información",
+                    confirmButtonText: "Entendido"
                 });
             }
         } catch (error) {
             console.error("Error al actualizar usuario:", error);
             Swal.fire({
+                ...swalConfig,
                 icon: "error",
                 title: "Problema",
                 text: "Hubo un problema al procesar la actualización",
+                confirmButtonText: "Entendido"
             });
         }
     });

@@ -26,18 +26,4 @@ router.get(
     ViewsController.renderProfileUser
 );
 
-router.get(
-    "/perfil-admin",
-    auth.authenticate,
-    auth.restrict(["admin"]),
-    ViewsController.renderProfileAdmin
-);
-
-router.get(
-    "/dashboard",
-    auth.authenticate,
-    auth.restrict(["admin"]),
-    ViewsController.renderAdminDashboard
-);
-
 module.exports = router;
