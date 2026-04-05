@@ -1,133 +1,114 @@
 document.addEventListener("DOMContentLoaded", () => {
     const viewPetsBtn = document.getElementById("view-pets");
 
-    if (viewPetsBtn) {
-        viewPetsBtn.addEventListener("click", async (e) => {
-            e.preventDefault();
+    if (!viewPetsBtn) return;
 
-            const user = JSON.parse(localStorage.getItem("user"));
-            if (!user?._id) {
-                console.error("No se encontró el ID del usuario en localStorage");
-                return;
-            }
+    viewPetsBtn.addEventListener("click", async (e) => {
+        e.preventDefault();
 
-            try {
-                const response = await fetch(`/api/v1/user/${user._id}/pets`, {
-                    method: "GET",
-                    credentials: "include"
-                });
+        const user = JSON.parse(localStorage.getItem("user"));
 
-                const result = await response.json();
+        if (!user?._id) {
+            Swal.fire({
+                title: "Error",
+                text: "Usuario no autenticado",
+                icon: "error",
+                confirmButtonText: "Aceptar",
+                customClass: { confirmButton: "swal-custom-confirm" },
+                buttonsStyling: false
+            });
+            return;
+        }
 
-                if (response.ok && result.pets) {
-                    let petsHtml = "";
-                    if (result.pets.length > 0) {
-                        petsHtml = result.pets.map(pet => {
-                            const petName = pet.petName || "Sin nombre";
-                            const species = pet.species || "Desconocida";
-                            const breed = pet.breed || "Sin raza";
-                            const age = (pet.age !== undefined && pet.age !== null) ? pet.age : "N/A";
-                            const sex = pet.sex || "N/A";
-                            const gps = pet.gps || "N/A";
+        try {
+            const response = await fetch(`/api/v1/user/${user._id}/pets`, {
+                method: "GET",
+                credentials: "include"
+            });
 
-                            const gpsButtons = gps !== "N/A"
-                                ? `
-                                <a href="/gps/${pet.gps}" class="page-btn-green bt"
-                                        onclick="trackGPS('${pet._id}')"
-                                        aria-label="Rastrear GPS de ${petName}"
-                                        title="Rastrear GPS">
-                                    Rastrear GPS
-                                </a>
-                                `
-                                : `
+            const result = await response.json();
+
+            if (response.ok && result.pets) {
+
+                let petsHtml = result.pets.length
+                    ? result.pets.map(pet => {
+                        const gps = pet.gps || "N/A";
+
+                        const gpsBtn = gps !== "N/A"
+                            ? `<a href="/gps/${pet.gps}" class="page-btn-green bt">Rastrear GPS</a>`
+                            : `<button class="page-btn-green bt" onclick="assignGPS('${pet._id}')">Asignar GPS</button>`;
+
+                        return `
+                        <div class="pet-card-item">
+                            <div class="pet-photo">
+                                ${pet.photo
+                                ? `<img src="${pet.photo}">`
+                                : `<div class="no-photo">🐾</div>`}
+                            </div>
+
+                            <div class="pet-info">
+                                <h3>${pet.petName}</h3>
+                                <p><strong>Especie:</strong> ${pet.species}</p>
+                                <p><strong>Raza:</strong> ${pet.breed}</p>
+                                <p><strong>Edad:</strong> ${pet.age ?? "N/A"}</p>
+                                <p><strong>Sexo:</strong> ${pet.sex ?? "N/A"}</p>
+                                <p><strong>GPS:</strong> ${gps}</p>
+                            </div>
+
+                            <div class="pet-actions">
+                                ${gpsBtn}
                                 <button class="page-btn-green bt"
-                                        onclick="assignGPS('${pet._id}')"
-                                        aria-label="Asignar GPS a ${petName}"
-                                        title="Asignar GPS">
-                                    Asignar GPS
+                                    onclick="editPet(this)"
+                                    data-id="${pet._id}"
+                                    data-name="${pet.petName || ''}"
+                                    data-species="${pet.species || ''}"
+                                    data-breed="${pet.breed || ''}"
+                                    data-age="${pet.age || ''}"
+                                    data-sex="${pet.sex || ''}"
+                                    data-color="${pet.color || ''}"
+                                    data-weight="${pet.weight || ''}"
+                                    data-size="${pet.size || ''}"
+                                    data-vaccines="${pet.vaccines ? pet.vaccines.join(',') : ''}"
+                                    data-conditions="${pet.conditions || ''}"
+                                    data-photo="${pet.photo || ''}">
+                                    Editar
                                 </button>
-                                `;
 
-                            return `
-                            <article class="pet-card-item" itemscope itemtype="https://schema.org/Pet">
-                                <figure class="pet-photo">
-                                    ${pet.photo
-                                    ? `<img src="${pet.photo}" alt="Foto de ${petName}" itemprop="image">`
-                                    : `<div class="no-photo" aria-label="Sin foto disponible">🐾</div>`}
-                                </figure>
+                                <button class="page-btn-red bt"
+                                    onclick="deletePet('${pet._id}')">
+                                    Eliminar
+                                </button>
+                            </div>
+                        </div>`;
+                    }).join("")
+                    : "<p>No tienes mascotas registradas.</p>";
 
-                                <section class="pet-info">
-                                    <h2 itemprop="name">${petName}</h2>
-                                    <p><strong>Especie:</strong> <span itemprop="species">${species}</span></p>
-                                    <p><strong>Raza:</strong> <span itemprop="breed">${breed}</span></p>
-                                    <p><strong>GPS-ID:</strong> <span itemprop="gps">${gps}</span></p>
-                                    <p><strong>Edad:</strong> <span itemprop="age">${age}</span> |
-                                    <strong>Sexo:</strong> <span itemprop="gender">${sex}</span></p>
-                                </section>
-
-                                <footer class="pet-actions" role="group" aria-label="Acciones para la mascota">
-                                    ${gpsButtons}
-
-                                    <button class="page-btn-green bt"
-                                            onclick="editPet(this)"
-                                            data-id="${pet._id}"
-                                            data-name="${pet.petName || ''}"
-                                            data-species="${pet.species || ''}"
-                                            data-breed="${pet.breed || ''}"
-                                            data-age="${pet.age || ''}"
-                                            data-sex="${pet.sex || ''}"
-                                            data-photo="${pet.photo || ''}"
-                                            aria-label="Editar información de ${petName}"
-                                            title="Editar mascota">
-                                        Editar
-                                    </button>
-
-                                    <button class="page-btn-red bt btn--danger"
-                                            onclick="deletePet('${pet._id}')"
-                                            aria-label="Eliminar registro de ${petName}"
-                                            title="Eliminar mascota">
-                                        Eliminar
-                                    </button>
-                                </footer>
-                            </article>
-                        `;
-                        }).join("");
-                    } else {
-                        petsHtml = "<p>No tienes mascotas registradas.</p>";
-                    }
-
-                    Swal.fire({
-                        title: "Mis Mascotas Registradas",
-                        html: `<div class="pets-list">${petsHtml}</div>`,
-                        width: 800,
-                        confirmButtonText: "Cerrar",
-                        customClass: {
-                            popup: "swal-popup",
-                            title: "swal-dark-title",
-                            confirmButton: "swal-confirm-btn",
-                            cancelButton: "swal-cancel-btn",
-                            htmlContainer: "swal-form"
-                        }
-                    });
-                } else {
-                    Swal.fire({
-                        title: "Error",
-                        text: result.message || "No se pudieron obtener las mascotas",
-                        icon: "error",
-                        confirmButtonText: "Aceptar"
-                    });
-                }
-            } catch (error) {
-                console.error("Error al obtener mascotas:", error);
                 Swal.fire({
-                    title: "Error de conexión",
-                    text: "No se pudo conectar con el servidor",
-                    icon: "error",
-                    confirmButtonText: "Aceptar"
+                    title: "Mis mascotas",
+                    html: `<div class="pets-list">${petsHtml}</div>`,
+                    width: 800,
+                    confirmButtonText: "Cerrar",
+                    customClass: {
+                        confirmButton: "swal-custom-confirm"
+                    },
+                    buttonsStyling: false
                 });
+
+            } else {
+                throw new Error(result.message);
             }
-        });
-    }
+
+        } catch {
+            Swal.fire({
+                title: "Error",
+                text: "No se pudieron cargar las mascotas",
+                icon: "error",
+                confirmButtonText: "Aceptar",
+                customClass: { confirmButton: "swal-custom-confirm" },
+                buttonsStyling: false
+            });
+        }
+    });
 });
 
 async function deletePet(petId) {
@@ -139,259 +120,217 @@ async function deletePet(petId) {
         confirmButtonText: "Sí, eliminar",
         cancelButtonText: "Cancelar",
         customClass: {
-            popup: "swal-dark-modal",
-            title: "swal-dark-title",
-            confirmButton: "swal-dark-confirm",
-            cancelButton: "swal-dark-cancel"
-        }
+            confirmButton: "swal-custom-confirm",
+            cancelButton: "swal-custom-cancel"
+        },
+        buttonsStyling: false
     });
 
-    if (confirm.isConfirmed) {
-        try {
-            const response = await fetch(`/api/v1/pets/delete/${petId}`, {
-                method: "DELETE",
-                credentials: "include"
+    if (!confirm.isConfirmed) return;
+
+    try {
+        const response = await fetch(`/api/v1/pets/delete/${petId}`, {
+            method: "DELETE"
+        });
+
+        if (response.ok) {
+            Swal.fire({
+                title: "Eliminada",
+                text: "Mascota eliminada",
+                icon: "success",
+                confirmButtonText: "Aceptar",
+                customClass: { confirmButton: "swal-custom-confirm" },
+                buttonsStyling: false
             });
 
-            const result = await response.json();
+            setTimeout(() => document.getElementById("view-pets").click(), 800);
+        } else throw new Error();
 
-            if (response.ok) {
-                Swal.fire("Eliminada", "La mascota fue eliminada correctamente", "success");
-                setTimeout(() => {
-                    document.getElementById("view-pets").click();
-                }, 1000);
-            } else {
-                Swal.fire("Error", result.message || "No se pudo eliminar la mascota", "error");
-            }
-        } catch (error) {
-            Swal.fire("Error", "Error de conexión con el servidor", "error");
-        }
+    } catch {
+        Swal.fire({
+            title: "Error",
+            text: "No se pudo eliminar",
+            icon: "error",
+            confirmButtonText: "Aceptar",
+            customClass: { confirmButton: "swal-custom-confirm" },
+            buttonsStyling: false
+        });
     }
 }
 
 window.editPet = async function (btn) {
     const petId = btn.getAttribute("data-id");
-    const petName = btn.getAttribute("data-name");
-    const species = btn.getAttribute("data-species");
-    const breed = btn.getAttribute("data-breed");
-    const age = btn.getAttribute("data-age");
-    const sex = btn.getAttribute("data-sex");
-    const photo = btn.getAttribute("data-photo");
 
     const formHtml = `
-        <form id="edit-pet-form" class="swal-form"
-            role="form"
-            aria-label="Formulario de edición de mascota"
-            itemscope itemtype="https://schema.org/Pet">
+        <form class="swal-form">
+            <label>Nombre:</label>
+            <input type="text" id="petName" class="swal-input" value="${btn.dataset.name || ""}">
 
-            <label for="petName">Nombre:</label>
-            <input type="text" id="petName" name="petName"
-                    value="${petName}"
-                    class="swal-input"
-                    itemprop="name"
-                    aria-required="true" />
+            <label>Especie:</label>
+            <input type="text" id="species" class="swal-input" value="${btn.dataset.species || ""}">
 
-            <label for="species">Especie:</label>
-            <input type="text" id="species" name="species"
-                    value="${species}"
-                    class="swal-input"
-                    itemprop="species" />
+            <label>Raza:</label>
+            <input type="text" id="breed" class="swal-input" value="${btn.dataset.breed || ""}">
 
-            <label for="breed">Raza:</label>
-            <input type="text" id="breed" name="breed"
-                    value="${breed}"
-                    class="swal-input"
-                    itemprop="breed" />
+            <label>Edad:</label>
+            <input type="number" id="age" class="swal-input" value="${btn.dataset.age || ""}">
 
-            <label for="age">Edad:</label>
-            <input type="number" id="age" name="age"
-                    value="${age}"
-                    class="swal-input"
-                    itemprop="age" />
-
-            <label for="sex">Sexo:</label>
-            <select id="sex" name="sex"
-                    class="swal-input"
-                    itemprop="gender">
-                <option value="M" ${sex === "M" ? "selected" : ""}>Macho</option>
-                <option value="F" ${sex === "F" ? "selected" : ""}>Hembra</option>
+            <label>Sexo:</label>
+            <select id="sex" class="swal-input">
+                <option value="M" ${btn.dataset.sex === "M" ? "selected" : ""}>Macho</option>
+                <option value="F" ${btn.dataset.sex === "F" ? "selected" : ""}>Hembra</option>
             </select>
 
-            <div>
-                ${photo
-            ? `<img src="${photo}" alt="Foto actual de ${petName}" class="hidden img-pet" itemprop="image" />`
-            : `<span class="hidden no-photo" aria-label="Sin foto disponible">🐾</span>`}
+            <div style="text-align:center;">
+                ${btn.dataset.photo
+            ? `<img src="${btn.dataset.photo}" class="hidden" style="max-width:100px;border-radius:8px;">`
+            : "Sin foto"}
             </div>
 
-            <label for="photo">Actualizar foto:</label>
-            <input type="file" id="photo" name="photo"
-                    class="swal-input"
-                    accept="image/*"
-                    aria-label="Subir nueva foto de la mascota" />
-            </form>
-        `;
+            <label>Actualizar foto:</label>
+            <input type="file" id="photo" class="swal-input">
+        </form>
+    `;
 
-    const { value: formValues } = await Swal.fire({
+    const { value } = await Swal.fire({
         title: "Editar Mascota",
         html: formHtml,
-        focusConfirm: false,
+        width: 900,
         showCancelButton: true,
         confirmButtonText: "Guardar cambios",
         cancelButtonText: "Cancelar",
-        width: 900,
         customClass: {
-            popup: "swal-popup",
-            title: "swal-dark-title",
-            confirmButton: "swal-confirm-btn",
-            cancelButton: "swal-cancel-btn",
-            htmlContainer: "swal-form"
+            confirmButton: "swal-custom-confirm",
+            cancelButton: "swal-custom-cancel"
         },
-        preConfirm: () => {
-            return {
-                petName: document.getElementById("petName").value,
-                species: document.getElementById("species").value,
-                breed: document.getElementById("breed").value,
-                age: document.getElementById("age").value,
-                sex: document.getElementById("sex").value,
-                photoFile: document.getElementById("photo").files[0]
-            };
-        }
+        buttonsStyling: false,
+        preConfirm: () => ({
+            petName: document.getElementById("petName").value,
+            species: document.getElementById("species").value,
+            breed: document.getElementById("breed").value,
+            age: document.getElementById("age").value,
+            sex: document.getElementById("sex").value,
+            photoFile: document.getElementById("photo").files[0]
+        })
     });
 
-    if (formValues) {
-        try {
-            const formData = new FormData();
-            formData.append("petName", formValues.petName);
-            formData.append("species", formValues.species);
-            formData.append("breed", formValues.breed);
-            formData.append("age", formValues.age);
-            formData.append("sex", formValues.sex);
-            if (formValues.photoFile) {
-                formData.append("photo", formValues.photoFile);
-            }
+    if (!value) return;
 
-            const response = await fetch(`/api/v1/pets/update/${petId}`, {
-                method: "PUT",
-                credentials: "include",
-                body: formData
+    try {
+        const formData = new FormData();
+        formData.append("petName", value.petName);
+        formData.append("species", value.species);
+        formData.append("breed", value.breed);
+        formData.append("age", value.age);
+        formData.append("sex", value.sex);
+
+        if (value.photoFile) {
+            formData.append("photo", value.photoFile);
+        }
+
+        const response = await fetch(`/api/v1/pets/update/${petId}`, {
+            method: "PUT",
+            body: formData
+        });
+
+        if (response.ok) {
+            Swal.fire({
+                title: "Actualizada",
+                text: "La mascota fue actualizada correctamente",
+                icon: "success",
+                confirmButtonText: "Aceptar",
+                customClass: { confirmButton: "swal-custom-confirm" },
+                buttonsStyling: false
             });
 
-            const result = await response.json();
-
-            if (response.ok) {
-                Swal.fire("Actualizada", "La mascota fue actualizada correctamente", "success");
-                setTimeout(() => {
-                    document.getElementById("view-pets").click();
-                }, 800);
-            } else {
-                Swal.fire("Error", result.message || "No se pudo actualizar la mascota", "error");
-            }
-        } catch (error) {
-            Swal.fire("Error", "Error de conexión con el servidor", "error");
+            setTimeout(() => {
+                document.getElementById("view-pets").click();
+            }, 800);
+        } else {
+            throw new Error();
         }
+
+    } catch {
+        Swal.fire({
+            title: "Error",
+            text: "No se pudo actualizar la mascota",
+            icon: "error",
+            confirmButtonText: "Aceptar",
+            customClass: { confirmButton: "swal-custom-confirm" },
+            buttonsStyling: false
+        });
     }
 };
 
 window.assignGPS = async function (petId) {
     const user = JSON.parse(localStorage.getItem("user"));
-    if (!user?._id) {
-        Swal.fire("Error", "No se encontró el usuario en sesión", "error");
-        return;
-    }
 
-    const generatedDeviceId = `SentinelTrack Systems GPS ${Date.now()}`;
+    const deviceId = `GPS-${Date.now()}`;
 
     const formHtml = `
-        <form id="assign-gps-form"
-            class="swal-form"
-            role="form"
-            aria-label="Formulario de asignación de GPS"
-            itemscope itemtype="https://schema.org/FormAction"
-            style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;max-width:100%;overflow-x:hidden;">
-
-        <div style="text-align:center;width:100%;">
-            <label for="deviceId"
-                style="font-weight:600;display:block;margin-bottom:0.3rem;"
-                itemprop="instrument">
-            ID del dispositivo GPS:
-            </label>
-            <input type="text"
-                id="deviceId"
-                name="deviceId"
-                class="swal2-input"
-                value="${generatedDeviceId}"
-                readonly
-                itemprop="identifier"
-                aria-readonly="true"
-                style="width:90%;max-width:400px;text-align:center;" />
-        </div>
-
-        <div style="text-align:center;width:100%;">
-            <label for="gpsName"
-                style="font-weight:600;display:block;margin-bottom:0.3rem;"
-                itemprop="name">
-            Alias del GPS:
-            </label>
-            <input type="text"
-                id="gpsName"
-                name="gpsName"
-                class="swal2-input"
-                placeholder="Ej: GPS de Firulais"
-                itemprop="alternateName"
-                aria-required="true"
-                style="width:90%;max-width:400px;text-align:center;" />
-        </div>
+        <form class="swal-form">
+            <input id="deviceId" class="swal-input" value="${deviceId}" readonly>
+            <input id="name" class="swal-input" placeholder="Nombre del GPS">
+            <input id="description" class="swal-input" placeholder="Descripción">
+            
+            <select id="status" class="swal-input">
+                <option value="activo">Activo</option>
+                <option value="inactivo">Inactivo</option>
+            </select>
         </form>
     `;
 
-    const { value: formValues } = await Swal.fire({
-        title: "Registrar y Asignar GPS a Mascota",
+    const { value } = await Swal.fire({
+        title: "Asignar GPS",
         html: formHtml,
-        focusConfirm: false,
         showCancelButton: true,
         confirmButtonText: "Guardar",
         cancelButtonText: "Cancelar",
-        width: 600,
         customClass: {
-            popup: "swal-popup",
-            title: "swal-dark-title",
-            confirmButton: "swal-confirm-btn",
-            cancelButton: "swal-cancel-btn",
-            htmlContainer: "swal-form"
+            confirmButton: "swal-custom-confirm",
+            cancelButton: "swal-custom-cancel"
         },
-        preConfirm: () => {
-            return {
-                deviceId: document.getElementById("deviceId").value,
-                gpsName: document.getElementById("gpsName").value
-            };
-        }
+        buttonsStyling: false,
+        preConfirm: () => ({
+            deviceId: document.getElementById("deviceId").value,
+            name: document.getElementById("name").value,
+            description: document.getElementById("description").value,
+            status: document.getElementById("status").value
+        })
     });
 
-    if (formValues) {
-        try {
-            const response = await fetch(`/api/v1/gps-device/create-pet`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                credentials: "include",
-                body: JSON.stringify({
-                    deviceId: formValues.deviceId,
-                    name: formValues.gpsName,
-                    assignedToUser: user._id,
-                    pet: petId
-                })
+    if (!value) return;
+
+    try {
+        const response = await fetch(`/api/v1/gps-device/create-pet`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                ...value,
+                assignedToUser: user._id,
+                pet: petId
+            })
+        });
+
+        if (response.ok) {
+            Swal.fire({
+                title: "Asignado",
+                text: "GPS creado correctamente",
+                icon: "success",
+                confirmButtonText: "Aceptar",
+                customClass: { confirmButton: "swal-custom-confirm" },
+                buttonsStyling: false
             });
+        } else throw new Error();
 
-            const result = await response.json();
-
-            if (response.ok) {
-                Swal.fire("Asignado", "El GPS fue creado y asignado correctamente", "success");
-            } else {
-                Swal.fire("Error", result.message || "No se pudo crear/asignar el GPS", "error");
-            }
-        } catch (error) {
-            Swal.fire("Error", "Error de conexión con el servidor", "error");
-        }
+    } catch {
+        Swal.fire({
+            title: "Error",
+            text: "No se pudo asignar",
+            icon: "error",
+            confirmButtonText: "Aceptar",
+            customClass: { confirmButton: "swal-custom-confirm" },
+            buttonsStyling: false
+        });
     }
 };
-
-

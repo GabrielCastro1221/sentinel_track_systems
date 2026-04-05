@@ -142,64 +142,33 @@ ul {
     font-size: 11px;
 }
 
-.swal-popup {
+.swal2-popup {
+    background: var(--bg--2--) !important;
+    color: var(--cl--5--) !important;
     border-radius: 12px;
 }
 
-.swal-confirm-btn {
-    margin-top: 1em;
-    background: var(--cl--5--);
-    color: var(--bg--1--);
-    padding: 0.8em 1.5em;
-    border-radius: 8px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    width: 100%;
-    border: 1px solid var(--bg--4--);
+.swal2-title {
+    color: var(--cl--5--) !important;
 }
 
-.swal-confirm-btn:hover {
-    border: 1px solid var(--bg--1--);
-    background: var(--cl--5--);
-    color: var(--cl--1--);
-    border: none;
-}
-
-.swal-cancel-btn {
-    background: var(--cl--2--);
-    color: var(--cl--1--);
-    font-weight: 500;
-    border-radius: 8px;
-    padding: 8px 20px;
-    transition: all 0.3s ease;
-}
-
-.swal-cancel-btn:hover {
-    border: 2px solid var(--cl--5--);
-}
-
-.swal-form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 10px;
+.swal2-html-container {
+    color: var(--cl--5--) !important;
 }
 
 .swal-input {
     width: 100%;
-    padding: 10px 14px;
-    border: 1px solid var(--cl--5--);
-    border-radius: 8px;
-    font-size: 14px;
-    transition: all 0.3s ease;
-    background: var(--cl--1--);
-    color: var(--bg--1--);
+    margin: 8px 0;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid var(--cl--4--);
+    color: var(--cl--5--);
+    border-radius: 6px;
 }
 
-.swal-input:focus {
-    background: var(--cl--1--);
-    box-shadow: var(--shadow--);
-    outline: none;
+.swal-input select {
+    background: var(--bg--1--);
+    color: var(--cl--5--);
 }
 
 .swal-custom-confirm {
@@ -210,6 +179,7 @@ ul {
     border-radius: 8px;
     padding: 10px 25px;
     cursor: pointer;
+    margin-left: 10px;
 }
 
 .swal-custom-cancel {

@@ -76,12 +76,12 @@ document.addEventListener("DOMContentLoaded", () => {
         return `
             <div style="font-size:13px;line-height:1.4">
                 <b>GPS - ${title}</b><br>
-                📍 Latitud: ${loc.latitude.toFixed(6)}<br>
-                📍 Longitud: ${loc.longitude.toFixed(6)}<br>
+                Latitud: ${loc.latitude.toFixed(6)}<br>
+                Longitud: ${loc.longitude.toFixed(6)}<br>
                 Ciudad: ${city}<br>
                 Zona: ${zone}<br>
-                📌 Dirección: ${address}<br>
-                🕒 Fecha: ${date}
+                Dirección: ${address}<br>
+                Fecha: ${date}
             </div>
         `;
     }

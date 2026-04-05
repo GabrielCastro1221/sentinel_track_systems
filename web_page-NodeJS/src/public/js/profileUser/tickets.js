@@ -20,8 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             const result = await response.json();
-            console.log("Tickets recibidos:", result);
-
             const tickets = Array.isArray(result.tickets) ? result.tickets : [];
 
             let ticketsHtml = "";
@@ -30,42 +28,44 @@ document.addEventListener("DOMContentLoaded", () => {
                 ticketsHtml = "<p>No tienes tickets registrados.</p>";
             } else {
                 ticketsHtml = tickets.map(ticket => `
-                    <article class="ticket-card-item" itemscope itemtype="https://schema.org/Order">
+                    <article class="ticket-card-item">
                         <header class="ticket-info">
                             <h2 class="title-ticket">Orden de compra</h2>
-                            <h2 class="code" itemprop="orderNumber"><span>Codigo de compra: </span> # ${ticket?.code ?? "N/A"}</h2>
-                            <p><strong>Fecha de compra:</strong>
-                            <time itemprop="orderDate" datetime="${ticket?.purchase_datetime}">
-                                ${ticket?.purchase_datetime ? new Date(ticket.purchase_datetime).toLocaleString() : "N/A"}
-                            </time>
+                            <h2 class="code"># ${ticket?.code ?? "N/A"}</h2>
+                            <p><strong>Fecha:</strong>
+                                ${ticket?.purchase_datetime
+                                    ? new Date(ticket.purchase_datetime).toLocaleString()
+                                    : "N/A"}
                             </p>
-                            <p><strong>Monto:</strong> <span itemprop="priceCurrency" content="USD">$</span><span itemprop="price">${ticket?.amount ?? "N/A"}</span></p>
-                            <p><strong>Estado:</strong> <span itemprop="orderStatus">${ticket?.status ?? "N/A"}</span></p>
+                            <p><strong>Monto:</strong> $${ticket?.amount ?? "N/A"}</p>
+                            <p><strong>Estado:</strong> ${ticket?.status ?? "N/A"}</p>
                         </header>
 
-                        <section class="ticket-products" role="list" aria-label="Productos del ticket">
+                        <section class="ticket-products">
                             <h3>Productos:</h3>
                             <ul>
-                            ${ticket?.products?.map(p => `
-                                <li role="listitem" itemprop="acceptedOffer" itemscope itemtype="https://schema.org/Offer">
-                                <span itemprop="name" class="prod-title">${p.title}</span> -
-                                <span>Cantidad: <span itemprop="eligibleQuantity">${p.quantity}</span></span> -
-                                <span>Precio: $<span itemprop="price">${p.price}</span></span>
-                                </li>
-                            `).join("") ?? "<li>No hay productos</li>"}
+                                ${ticket?.products?.map(p => `
+                                    <li>
+                                        ${p.title} -
+                                        Cantidad: ${p.quantity} -
+                                        Precio: $${p.price}
+                                    </li>
+                                `).join("") ?? "<li>No hay productos</li>"}
                             </ul>
                         </section>
 
                         <footer class="ticket-actions">
-                            <button class="page-btn-green" onclick="downloadTicketPDF('${ticket._id}')" aria-label="Descargar comprobante en PDF" title="Descargar comprobante en PDF">
-                            Descargar PDF
+                            <button class="page-btn-green"
+                                onclick="downloadTicketPDF('${ticket._id}')">
+                                Descargar PDF
                             </button>
-                            <button class="page-btn-red bt btn--danger" onclick="cancelTicket('${ticket._id}')" aria-label="Cancelar compra" title="Cancelar compra">
-                            Cancelar compra
+                            <button class="page-btn-red"
+                                onclick="cancelTicket('${ticket._id}')">
+                                Cancelar compra
                             </button>
                         </footer>
-                        </article>
-                    `).join("");
+                    </article>
+                `).join("");
             }
 
             Swal.fire({
@@ -75,6 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 confirmButtonText: "Cerrar",
                 customClass: {
                     popup: "swal-popup",
+                    title: "swal-dark-title",
                     confirmButton: "swal-confirm-btn",
                     cancelButton: "swal-cancel-btn",
                     htmlContainer: "swal-form"
@@ -82,8 +83,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
         } catch (error) {
-            console.error("Error al obtener tickets:", error);
-
             Swal.fire({
                 title: "Error",
                 text: "No se pudieron obtener los tickets",
@@ -91,6 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 confirmButtonText: "Aceptar",
                 customClass: {
                     popup: "swal-popup",
+                    title: "swal-dark-title",
                     confirmButton: "swal-confirm-btn"
                 }
             });
@@ -107,6 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
             cancelButtonText: "No",
             customClass: {
                 popup: "swal-popup",
+                title: "swal-dark-title",
                 confirmButton: "swal-confirm-btn",
                 cancelButton: "swal-cancel-btn"
             }
@@ -130,6 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     confirmButtonText: "Aceptar",
                     customClass: {
                         popup: "swal-popup",
+                        title: "swal-dark-title",
                         confirmButton: "swal-confirm-btn"
                     }
                 });
@@ -145,6 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     confirmButtonText: "Aceptar",
                     customClass: {
                         popup: "swal-popup",
+                        title: "swal-dark-title",
                         confirmButton: "swal-confirm-btn"
                     }
                 });
@@ -157,6 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 confirmButtonText: "Aceptar",
                 customClass: {
                     popup: "swal-popup",
+                    title: "swal-dark-title",
                     confirmButton: "swal-confirm-btn"
                 }
             });
@@ -170,9 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 credentials: "include"
             });
 
-            if (!response.ok) {
-                throw new Error("Error al generar PDF");
-            }
+            if (!response.ok) throw new Error();
 
             const blob = await response.blob();
             const url = window.URL.createObjectURL(blob);
@@ -185,6 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
             a.remove();
 
             window.URL.revokeObjectURL(url);
+
         } catch (err) {
             Swal.fire({
                 title: "Error",
@@ -193,6 +196,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 confirmButtonText: "Aceptar",
                 customClass: {
                     popup: "swal-popup",
+                    title: "swal-dark-title",
                     confirmButton: "swal-confirm-btn"
                 }
             });
