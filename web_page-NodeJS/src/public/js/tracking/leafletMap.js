@@ -62,9 +62,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let geofenceMode = false;
     let geofencePoints = [];
+    let tempPolyline = null;
     let tempPolygon = null;
     let tempLine = null;
     let gpsMarker = null;
+
+    function isNearFirstPoint(latlng) {
+        if (geofencePoints.length === 0) return false;
+
+        const first = geofencePoints[0];
+        const distance = map.distance([first[1], first[0]], latlng);
+
+        return distance < 20;
+    }
 
     function formatLocationInfo(title, loc) {
         const date = loc.date
@@ -73,6 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const city = loc.city || "Sin ciudad";
         const zone = loc.zone || "Sin zona";
         const address = loc.address || "Sin dirección";
+
         return `
             <div style="font-size:13px;line-height:1.4">
                 <b>GPS - ${title}</b><br>
@@ -88,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const control = L.control({ position: "bottomleft" });
     control.onAdd = () => {
-        const div = L.DomUtil.create("div", "leaflet-bar leaflet-control")
+        const div = L.DomUtil.create("div", "leaflet-bar leaflet-control");
         div.innerHTML = `
             <button id="btn-geofence">Dibujar zona segura</button>
             <button id="btn-finish">Guardar</button>
@@ -98,26 +109,29 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     control.addTo(map);
+
     setTimeout(() => {
         const btnGeo = document.getElementById("btn-geofence");
         const btnFinish = document.getElementById("btn-finish");
+
         btnGeo.onclick = () => {
             geofenceMode = true;
             geofencePoints = [];
+
+            if (tempPolyline) map.removeLayer(tempPolyline);
             if (tempPolygon) map.removeLayer(tempPolygon);
             if (tempLine) map.removeLayer(tempLine);
+
             btnGeo.classList.add("active");
         };
 
         btnFinish.onclick = () => {
-            if (!geofenceMode) return;
-            if (geofencePoints.length < 3) {
+            if (!tempPolygon || geofencePoints.length < 3) {
                 Swal.fire({
                     icon: "error",
                     title: "Error",
-                    text: "Debes seleccionar mínimo 3 puntos de referencia"
+                    text: "Debes cerrar la zona haciendo click en el punto inicial"
                 });
-                btnGeo.classList.remove("active");
                 return;
             }
 
@@ -130,6 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 cancelButtonText: "Cancelar"
             }).then((result) => {
                 if (!result.isConfirmed || !result.value) return;
+
                 socket.emit("gps:geofence:add", {
                     gpsId: deviceId,
                     geofenceData: {
@@ -137,10 +152,14 @@ document.addEventListener("DOMContentLoaded", () => {
                         polygon: geofencePoints
                     }
                 });
+
                 geofenceMode = false;
                 geofencePoints = [];
+
+                if (tempPolyline) map.removeLayer(tempPolyline);
                 if (tempPolygon) map.removeLayer(tempPolygon);
                 if (tempLine) map.removeLayer(tempLine);
+
                 btnGeo.classList.remove("active");
             });
         };
@@ -149,66 +168,78 @@ document.addEventListener("DOMContentLoaded", () => {
     map.on("dblclick", (e) => {
         const lat = e.latlng.lat;
         const lng = e.latlng.lng;
+
         if (geofenceMode) {
+
+            if (isNearFirstPoint(e.latlng) && geofencePoints.length >= 3) {
+
+                if (tempLine) map.removeLayer(tempLine);
+                if (tempPolyline) map.removeLayer(tempPolyline);
+                if (tempPolygon) map.removeLayer(tempPolygon);
+
+                tempPolygon = L.polygon(
+                    geofencePoints.map(p => [p[1], p[0]]),
+                    { color: "#157e8a" }
+                ).addTo(map);
+
+                geofenceMode = false;
+                return;
+            }
+
             geofencePoints.push([lng, lat]);
-            if (tempPolygon) map.removeLayer(tempPolygon);
-            tempPolygon = L.polygon(
+
+            if (tempPolyline) map.removeLayer(tempPolyline);
+
+            tempPolyline = L.polyline(
                 geofencePoints.map(p => [p[1], p[0]]),
-                { color: "red" }
+                { color: "#157e8a" }
             ).addTo(map);
-            if (tempLine) map.removeLayer(tempLine);
+
             return;
         }
 
         const html = `
             <div>
-                <h5 class="poi-title">Añadir esta ubicación a mis puntos de interes</h5>
-                <input id="poi-name" class="input" placeholder="nombre del punto de interes"/>
-                <button id="save-poi">Guardar punto de interes</button>
+                <h5>Añadir punto de interés</h5>
+                <input id="poi-name" placeholder="Nombre"/>
+                <button id="save-poi">Guardar</button>
             </div>
         `;
 
-        const popup = L.popup()
-            .setLatLng([lat, lng])
-            .setContent(html);
+        const popup = L.popup().setLatLng([lat, lng]).setContent(html);
+
         popup.on("add", () => {
             const input = document.getElementById("poi-name");
             const btnSave = document.getElementById("save-poi");
 
-            function savePOI() {
+            btnSave.onclick = () => {
                 const name = input.value.trim();
                 if (!name) return;
 
                 socket.emit("gps:poi:add", {
                     gpsId: deviceId,
-                    poiData: {
-                        name,
-                        latitude: lat,
-                        longitude: lng
-                    }
+                    poiData: { name, latitude: lat, longitude: lng }
                 });
-                map.closePopup();
-            }
 
-            btnSave.onclick = savePOI;
-            input.addEventListener("keydown", (e) => {
-                if (e.key === "Enter") {
-                    e.preventDefault();
-                    savePOI();
-                }
-            });
+                map.closePopup();
+            };
         });
+
         popup.openOn(map);
     });
 
     map.on("mousemove", (e) => {
         if (geofenceMode && geofencePoints.length > 0) {
-            const lastPoint = geofencePoints[geofencePoints.length - 1];
-            const currentPoint = [e.latlng.lat, e.latlng.lng];
+            const last = geofencePoints[geofencePoints.length - 1];
+
             if (tempLine) map.removeLayer(tempLine);
+
             tempLine = L.polyline(
-                [[lastPoint[1], lastPoint[0]], currentPoint],
-                { color: "orange", dashArray: "5,5" }
+                [[last[1], last[0]], [e.latlng.lat, e.latlng.lng]],
+                {
+                    color: "#157e8a",
+                    dashArray: "5,5"
+                }
             ).addTo(map);
         }
     });
@@ -216,11 +247,9 @@ document.addEventListener("DOMContentLoaded", () => {
     function renderPOIs(pois) {
         poiMarkers.forEach(m => map.removeLayer(m));
         poiMarkers.length = 0;
+
         pois.forEach(p => {
-            const m = L.marker(
-                [p.latitude, p.longitude],
-                { icon: poiIcon }
-            ).addTo(map);
+            const m = L.marker([p.latitude, p.longitude], { icon: poiIcon }).addTo(map);
             m.bindTooltip(p.name);
             poiMarkers.push(m);
         });
@@ -229,69 +258,66 @@ document.addEventListener("DOMContentLoaded", () => {
     function renderGeofences(list) {
         geofenceLayers.forEach(l => map.removeLayer(l));
         geofenceLayers.length = 0;
+
         list.forEach(g => {
-            const coords =
-                g.polygon.map(p => [p[1], p[0]]);
-            const poly = L.polygon(
-                coords,
-                { color: "red" }
-            ).addTo(map);
+            const coords = g.polygon.map(p => [p[1], p[0]]);
+            const poly = L.polygon(coords, {
+                color: "#157e8a",
+                weight: 1.5
+            }).addTo(map);
+
             poly.bindTooltip(g.name);
             geofenceLayers.push(poly);
         });
     }
 
-    socket.on("connect", () => {
-        socket.emit("gps:poi:get", { gpsId: deviceId });
-        socket.emit("gps:geofence:get", { gpsId: deviceId });
-        socket.emit("gps:getById", { deviceId });
-        socket.emit("gps:location:last", { deviceId });
-    });
-
     socket.on("gps:poi:get:response", renderPOIs);
     socket.on("gps:geofence:get:response", renderGeofences);
+    socket.on("gps:poi:add:response", renderPOIs);
+    socket.on("gps:geofence:add:response", renderGeofences);
+
     socket.on("gps:getById:response", (gps) => {
         if (!gps || !gps.lastLocation) return;
+
         const loc = gps.lastLocation;
+
         if (gpsMarker) map.removeLayer(gpsMarker);
-        gpsMarker = L.marker(
-            [loc.latitude, loc.longitude],
-            { icon: gpsIcon }
-        ).addTo(map);
+
+        gpsMarker = L.marker([loc.latitude, loc.longitude], { icon: gpsIcon }).addTo(map);
 
         const info = formatLocationInfo(gps.name || "GPS Device", loc);
+
         gpsMarker.bindPopup(info);
         gpsMarker.bindTooltip(gps.name || "GPS");
+
         map.setView([loc.latitude, loc.longitude], 15);
     });
 
     socket.on("gps:location:last:response", (location) => {
         if (!location) return;
-        if (gpsMarker)
-            map.removeLayer(gpsMarker);
-        gpsMarker = L.marker(
-            [
-                location.latitude,
-                location.longitude
-            ],
-            { icon: gpsIcon }
-        ).addTo(map);
 
-        const info = formatLocationInfo(
-            "Última ubicación",
-            location
-        );
+        if (gpsMarker) map.removeLayer(gpsMarker);
+
+        gpsMarker = L.marker([location.latitude, location.longitude], { icon: gpsIcon }).addTo(map);
+
+        const info = formatLocationInfo("Última ubicación", location);
 
         gpsMarker.bindPopup(info);
         gpsMarker.bindTooltip(location.city || "GPS");
 
-        map.setView(
-            [
-                location.latitude,
-                location.longitude
-            ],
-            15
-        );
+        map.setView([location.latitude, location.longitude], 15);
+    });
+
+    function loadAllData() {
+        socket.emit("gps:poi:get", { gpsId: deviceId });
+        socket.emit("gps:geofence:get", { gpsId: deviceId });
+        socket.emit("gps:getById", { deviceId });
+        socket.emit("gps:location:last", { deviceId });
     }
-    );
+
+    socket.on("connect", loadAllData);
+
+    if (socket.connected) {
+        loadAllData();
+    }
 });
