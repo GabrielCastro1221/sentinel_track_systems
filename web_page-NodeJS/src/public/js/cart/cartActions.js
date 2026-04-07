@@ -26,6 +26,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const cartId = window.location.pathname.split("/").pop();
 
+    const userData = JSON.parse(localStorage.getItem("user"));
+    let isGuest = !userData?.cart;
+
     const swalConfig = {
         background: "var(--bg--2--)",
         color: "var(--cl--5--)",
@@ -37,8 +40,12 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     async function removeProduct(productId) {
+        const url = isGuest
+            ? `/api/v1/cart/guest/${cartId}/products/${productId}`
+            : `/api/v1/cart/${cartId}/products/${productId}`;
+
         try {
-            const response = await fetch(`/api/v1/cart/${cartId}/products/${productId}`, {
+            const response = await fetch(url, {
                 method: "DELETE",
                 headers: { "Content-Type": "application/json" }
             });
@@ -76,8 +83,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     async function emptyCart() {
+        const url = isGuest
+            ? `/api/v1/cart/guest/${cartId}`
+            : `/api/v1/cart/${cartId}`;
+
         try {
-            const response = await fetch(`/api/v1/cart/${cartId}`, {
+            const response = await fetch(url, {
                 method: "DELETE",
                 headers: { "Content-Type": "application/json" }
             });
