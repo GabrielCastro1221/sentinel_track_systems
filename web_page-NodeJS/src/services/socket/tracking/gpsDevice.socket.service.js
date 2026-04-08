@@ -149,6 +149,14 @@ module.exports = function (io) {
 
         socket.on("gps:geofence:add", async ({ gpsId, geofenceData }) => {
             try {
+                const gps = await GPSDeviceRepository.getGPSDeviceById(gpsId);
+                const exists = gps.geofences.find(g =>
+                    g.name === geofenceData.name &&
+                    JSON.stringify(g.polygon) === JSON.stringify(geofenceData.polygon)
+                );
+                if (exists) {
+                    return socket.emit("gps:geofence:add:response", gps.geofences);
+                }
                 const geofences = await GPSDeviceRepository.addGeoFence(gpsId, geofenceData);
                 socket.emit("gps:geofence:add:response", geofences);
             } catch (error) {
