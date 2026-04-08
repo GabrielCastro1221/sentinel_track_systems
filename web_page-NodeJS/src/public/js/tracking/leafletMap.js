@@ -85,13 +85,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const address = loc.address || "Sin dirección";
         return `
             <div style="font-size:13px;line-height:1.4">
-                <b>GPS - ${title}</b><br>
-                Latitud: ${loc.latitude.toFixed(6)}<br>
-                Longitud: ${loc.longitude.toFixed(6)}<br>
-                Ciudad: ${city}<br>
-                Zona: ${zone}<br>
-                Dirección: ${address}<br>
-                Fecha: ${date}
+                <b style="color:#1caaba;">GPS - ${title}</b><br>
+                <b style="color:#1caaba;">Latitud: ${loc.latitude.toFixed(6)}</b><br>
+                <b style="color:#1caaba;">Longitud: ${loc.longitude.toFixed(6)}</b><br>
+                <b style="color:#1caaba;">Ciudad: ${city}</b><br>
+                <b style="color:#1caaba;">Zona: ${zone}</b><br>
+                <b style="color:#1caaba;">Dirección: ${address}</b><br>
+                <b style="color:#1caaba;">Fecha: ${date}</b>
             </div>
         `;
     }
@@ -251,9 +251,58 @@ document.addEventListener("DOMContentLoaded", () => {
     function renderPOIs(pois) {
         poiMarkers.forEach(m => map.removeLayer(m));
         poiMarkers.length = 0;
+
         pois.forEach(p => {
             const m = L.marker([p.latitude, p.longitude], { icon: poiIcon }).addTo(map);
             m.bindTooltip(p.name);
+
+            const popupHtml = `
+            <div style="font-size:13px;line-height:1.4">
+                <b style="color:#1caaba;">Punto de interés: ${p.name}</b><br>
+                <b style="color:#1caaba;">Latitud: ${p.latitude}, <br> Longitud: ${p.longitude}</b><br>
+                <button class="delete-poi" data-id="${p._id}"
+                    style="
+                        background-color: rgb(185, 183, 183);
+                        color: #e60000;
+                        border:none;
+                        border-radius:6px;
+                        padding:6px 12px;
+                        margin-top:6px;
+                        cursor:pointer;
+                        font-size:12px;
+                        font-weight:600;
+                        transition:background 0.3s ease;
+                    "
+                >
+                    Eliminar Punto de interés
+                </button>
+            </div>
+        `;
+            m.bindPopup(popupHtml);
+
+            m.on("popupopen", () => {
+                const btn = document.querySelector(".delete-poi");
+                if (btn) {
+                    btn.onclick = () => {
+                        Swal.fire({
+                            icon: "warning",
+                            title: "¿Eliminar punto de interés?",
+                            text: "Esta acción no se puede deshacer.",
+                            showCancelButton: true,
+                            confirmButtonText: "Sí, eliminar",
+                            cancelButtonText: "Cancelar"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                socket.emit("gps:poi:delete", {
+                                    gpsId: deviceId,
+                                    poiId: p._id
+                                });
+                                map.removeLayer(m);
+                            }
+                        });
+                    };
+                }
+            });
             poiMarkers.push(m);
         });
     }
@@ -272,12 +321,12 @@ document.addEventListener("DOMContentLoaded", () => {
             poly.bindTooltip(g.name);
             const popupHtml = `
             <div style="font-size:13px;line-height:1.4">
-                <b>Zona segura: ${g.name}</b><br>
-                <b>Descripción: ${g.description}</b><br>
+                <b style="color:#1caaba;">Zona segura: ${g.name}</b><br>
+                <b style="color:#1caaba;">Descripción: ${g.description}</b><br>
                 <button class="delete-geofence" data-id="${g._id}"
                     style="
-                        background-color:#ff4d4d;
-                        color:white;
+                        background-color: rgb(185, 183, 183);
+                        color: #e60000;
                         border:none;
                         border-radius:6px;
                         padding:6px 12px;
@@ -287,9 +336,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         font-weight:600;
                         transition:background 0.3s ease;
                     "
-                    onmouseover="this.style.backgroundColor='#e60000'"
-                    onmouseout="this.style.backgroundColor='#ff4d4d'"
-                >Eliminar zona
+                >Eliminar zona segura
                 </button>
             </div>
         `;
@@ -345,6 +392,7 @@ document.addEventListener("DOMContentLoaded", () => {
     socket.on("gps:poi:get:response", renderPOIs);
     socket.on("gps:geofence:get:response", renderGeofences);
     socket.on("gps:poi:add:response", renderPOIs);
+    socket.on("gps:poi:delete:response", renderPOIs);
     socket.on("gps:geofence:add:response", renderGeofences);
     socket.on("gps:geofence:delete:response", renderGeofences);
 
