@@ -1,5 +1,4 @@
 # SCRIPT DE EJECUCION SERVER
 # python src/scripts/dev_runner.py dev --port 3001
 
-# SCRIPT DE EJECUCION TKINTER
-# python -m src.view.dialog_flow
+Pillow==9.2.0
