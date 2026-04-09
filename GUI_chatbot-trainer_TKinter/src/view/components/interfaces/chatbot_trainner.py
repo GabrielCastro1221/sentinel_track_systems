@@ -1,8 +1,14 @@
 import tkinter as tk
 from tkinter import ttk
+
 from components.index.sidebar import build_left_sidebar
-from components.index.center_table import build_center_table
-from styles.styles import Colors, Button
+from components.index.center_table import build_center_container
+
+from components.index.form_create import build_create_intent
+from components.index.view_intents import build_view_intents
+from components.index.chatbot import build_chatbot
+
+from styles.styles import Colors
 
 
 class VectorApp:
@@ -34,18 +40,32 @@ class VectorApp:
             font=("Roboto", 10, "bold"),
         )
 
-        style.configure(
-            "Accent.TButton",
-            background=Button.BG,
-            foreground=Button.TEXT,
-            font=("Roboto", 10, "bold"),
-            padding=6,
-        )
-        style.map("Accent.TButton", background=[("active", Button.HOVER)])
-
     def build_ui(self):
-        build_left_sidebar(self.root)
-        self.tree = build_center_table(self.root)
+        build_left_sidebar(
+            self.root,
+            create_intent_cb=self.show_create,
+            view_intents_cb=self.show_view,
+            chatbot_cb=self.show_chatbot,
+        )
+
+        self.center = build_center_container(self.root)
+        self.show_create()
+
+    def clear_center(self):
+        for widget in self.center.winfo_children():
+            widget.destroy()
+
+    def show_create(self):
+        self.clear_center()
+        build_create_intent(self.center)
+
+    def show_view(self):
+        self.clear_center()
+        build_view_intents(self.center)
+
+    def show_chatbot(self):
+        self.clear_center()
+        build_chatbot(self.center)
 
 
 if __name__ == "__main__":
